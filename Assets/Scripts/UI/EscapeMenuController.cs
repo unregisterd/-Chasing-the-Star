@@ -407,6 +407,11 @@ public class EscapeMenuController : MonoBehaviour
             return;
         }
 
+        if (EndingSequence.IsPlaying)
+        {
+            return;
+        }
+
         _open = true;
         _transitioning = true;
         _transitionEnd = Time.unscaledTime + fadeDuration;

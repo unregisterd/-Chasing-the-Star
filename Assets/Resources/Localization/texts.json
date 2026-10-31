@@ -306,35 +306,62 @@
     {
       "id": "esc_resume",
       "type": "ui",
-      "speaker": { "zh": "", "en": "" },
-      "text": { "zh": "继续旅途", "en": "Continue" },
+      "speaker": {
+        "zh": "",
+        "en": ""
+      },
+      "text": {
+        "zh": "继续旅途",
+        "en": "Continue"
+      },
       "note": "ESC 菜单"
     },
     {
       "id": "esc_skills",
       "type": "ui",
-      "speaker": { "zh": "", "en": "" },
-      "text": { "zh": "技能提示", "en": "Skills" },
+      "speaker": {
+        "zh": "",
+        "en": ""
+      },
+      "text": {
+        "zh": "技能提示",
+        "en": "Skills"
+      },
       "note": "ESC 菜单"
     },
     {
       "id": "esc_menu",
       "type": "ui",
-      "speaker": { "zh": "", "en": "" },
-      "text": { "zh": "返回主菜单", "en": "Main Menu" },
+      "speaker": {
+        "zh": "",
+        "en": ""
+      },
+      "text": {
+        "zh": "返回主菜单",
+        "en": "Main Menu"
+      },
       "note": "ESC 菜单"
     },
     {
       "id": "esc_quit",
       "type": "ui",
-      "speaker": { "zh": "", "en": "" },
-      "text": { "zh": "退出游戏", "en": "Quit Game" },
+      "speaker": {
+        "zh": "",
+        "en": ""
+      },
+      "text": {
+        "zh": "退出游戏",
+        "en": "Quit Game"
+      },
       "note": "ESC 菜单"
     },
     {
       "id": "esc_default",
       "type": "ui",
-      "speaker": { "zh": "", "en": "" },
+      "speaker": {
+        "zh": "",
+        "en": ""
+      },
       "text": {
         "zh": "想要越过难关，技能必不可少。",
         "en": "Skills are essential for overcoming challenges."
@@ -344,42 +371,75 @@
     {
       "id": "esc_skill_courage",
       "type": "ui",
-      "speaker": { "zh": "", "en": "" },
-      "text": { "zh": "1 勇气", "en": "1 Courage" },
+      "speaker": {
+        "zh": "",
+        "en": ""
+      },
+      "text": {
+        "zh": "1 勇气",
+        "en": "1 Courage"
+      },
       "note": "技能名"
     },
     {
       "id": "esc_skill_wisdom",
       "type": "ui",
-      "speaker": { "zh": "", "en": "" },
-      "text": { "zh": "2 智慧", "en": "2 Wisdom" },
+      "speaker": {
+        "zh": "",
+        "en": ""
+      },
+      "text": {
+        "zh": "2 智慧",
+        "en": "2 Wisdom"
+      },
       "note": "技能名"
     },
     {
       "id": "esc_skill_patience",
       "type": "ui",
-      "speaker": { "zh": "", "en": "" },
-      "text": { "zh": "3 耐心", "en": "3 Patience" },
+      "speaker": {
+        "zh": "",
+        "en": ""
+      },
+      "text": {
+        "zh": "3 耐心",
+        "en": "3 Patience"
+      },
       "note": "技能名"
     },
     {
       "id": "esc_skill_hope",
       "type": "ui",
-      "speaker": { "zh": "", "en": "" },
-      "text": { "zh": "4 希望", "en": "4 Hope" },
+      "speaker": {
+        "zh": "",
+        "en": ""
+      },
+      "text": {
+        "zh": "4 希望",
+        "en": "4 Hope"
+      },
       "note": "技能名"
     },
     {
       "id": "esc_skill_shift",
       "type": "ui",
-      "speaker": { "zh": "", "en": "" },
-      "text": { "zh": "Shift 冲刺", "en": "Shift Dash" },
+      "speaker": {
+        "zh": "",
+        "en": ""
+      },
+      "text": {
+        "zh": "Shift 冲刺",
+        "en": "Shift Dash"
+      },
       "note": "技能名"
     },
     {
       "id": "skill_shift_desc",
       "type": "system",
-      "speaker": { "zh": "", "en": "" },
+      "speaker": {
+        "zh": "",
+        "en": ""
+      },
       "text": {
         "zh": "按住 Shift 冲刺：奔跑速度提升。",
         "en": "Hold Shift to sprint: you run faster and your leap carries farther."
@@ -389,23 +449,54 @@
     {
       "id": "menu_title",
       "type": "ui",
-      "speaker": { "zh": "", "en": "" },
-      "text": { "zh": "逐星", "en": "Chasing the Star" },
+      "speaker": {
+        "zh": "",
+        "en": ""
+      },
+      "text": {
+        "zh": "逐星",
+        "en": "Chasing the Star"
+      },
       "note": "主菜单标题"
     },
     {
       "id": "menu_start",
       "type": "ui",
-      "speaker": { "zh": "", "en": "" },
-      "text": { "zh": "开始旅途", "en": "Begin the Journey" },
+      "speaker": {
+        "zh": "",
+        "en": ""
+      },
+      "text": {
+        "zh": "开始旅途",
+        "en": "Begin the Journey"
+      },
       "note": "主菜单按钮"
     },
     {
       "id": "menu_quit",
       "type": "ui",
-      "speaker": { "zh": "", "en": "" },
-      "text": { "zh": "退出", "en": "Quit" },
+      "speaker": {
+        "zh": "",
+        "en": ""
+      },
+      "text": {
+        "zh": "退出",
+        "en": "Quit"
+      },
       "note": "主菜单按钮"
+    },
+    {
+      "id": "ending_last_words",
+      "type": "narration",
+      "speaker": {
+        "zh": "",
+        "en": ""
+      },
+      "text": {
+        "zh": "到了，这里就是世界的最高处。小骑士，前方什么也没有。或许星星只是一个传说，一个你梦中的美丽幻影，又或许……",
+        "en": "You have arrived. This is the highest place in the world. Little knight, there is nothing ahead. Perhaps the star was only a legend - a beautiful dream in your sleep. Or perhaps..."
+      },
+      "note": "终点长旁白"
     }
   ]
 }
