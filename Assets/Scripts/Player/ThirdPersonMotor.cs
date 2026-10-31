@@ -31,6 +31,7 @@ public class ThirdPersonMotor : MonoBehaviour, IMotor
     [SerializeField] private string speedParameter = "Speed";
     [SerializeField] private string jumpParameter = "Jump";
     [SerializeField] private string groundedParameter = "Grounded";
+    [SerializeField] private string fallingParameter = "Falling";
     [Tooltip("动画里跑步循环对应的地面速度（米/秒），用来消除脚滑")]
     [SerializeField] private float animationBaseSpeed = 3.4f;
 
@@ -206,7 +207,12 @@ public class ThirdPersonMotor : MonoBehaviour, IMotor
             animator.SetBool(groundedParameter, grounded);
         }
 
-        if (!string.IsNullOrEmpty(speedParameter) && animationBaseSpeed > 0.01f && speed > 0.05f)
+        if (!string.IsNullOrEmpty(fallingParameter))
+        {
+            animator.SetBool(fallingParameter, !grounded && _verticalVelocity < -1f);
+        }
+
+        if (grounded && !string.IsNullOrEmpty(speedParameter) && animationBaseSpeed > 0.01f && speed > 0.05f)
         {
             animator.speed = Mathf.Clamp(speed / animationBaseSpeed, 0.6f, 1.6f);
         }

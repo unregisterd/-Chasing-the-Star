@@ -7,7 +7,9 @@ public class EndingDirector : MonoBehaviour
     [Header("引用（留空自动查找）")]
     [SerializeField] private Camera viewCamera;
     [SerializeField] private Transform playerRoot;
-    [SerializeField] private FirstPersonMotor motor;
+    [Tooltip("留空则自动查找场景里的 IMotor（第一人称或第三人称）")]
+    [SerializeField] private MonoBehaviour motorSource;
+    private IMotor _motor;
     [SerializeField] private PlayerLook look;
 
     [Header("天空切换")]
@@ -56,9 +58,21 @@ public class EndingDirector : MonoBehaviour
             viewCamera = Camera.main;
         }
 
-        if (motor == null)
+        _motor = motorSource as IMotor;
+
+        if (_motor == null)
         {
-            motor = FindObjectOfType<FirstPersonMotor>();
+            MonoBehaviour[] behaviours = FindObjectsOfType<MonoBehaviour>();
+
+            for (int i = 0; i < behaviours.Length; i++)
+            {
+                if (behaviours[i] is IMotor candidate)
+                {
+                    _motor = candidate;
+                    motorSource = behaviours[i];
+                    break;
+                }
+            }
         }
 
         if (look == null)
@@ -66,9 +80,9 @@ public class EndingDirector : MonoBehaviour
             look = FindObjectOfType<PlayerLook>();
         }
 
-        if (playerRoot == null && motor != null)
+        if (playerRoot == null && motorSource != null)
         {
-            playerRoot = motor.transform;
+            playerRoot = motorSource.transform;
         }
     }
 
@@ -118,9 +132,9 @@ public class EndingDirector : MonoBehaviour
         viewCamera.transform.localRotation = _cameraOriginalLocalRotation;
         viewCamera.fieldOfView = _cameraOriginalFov;
 
-        if (motor != null)
+        if (_motor != null)
         {
-            motor.enabled = true;
+            _motor.Enabled = true;
         }
 
         if (look != null)
@@ -148,9 +162,9 @@ public class EndingDirector : MonoBehaviour
         _originalFogEnd = RenderSettings.fogEndDistance;
         _originalFogEnabled = RenderSettings.fog;
 
-        if (motor != null)
+        if (_motor != null)
         {
-            motor.enabled = false;
+            _motor.Enabled = false;
         }
 
         if (look != null)

@@ -6,7 +6,9 @@ public class PlayerRespawnManager : MonoBehaviour
 {
     [Header("引用（留空自动查找）")]
     [SerializeField] private PlayerInputReader input;
-    [SerializeField] private FirstPersonMotor motor;
+    [Tooltip("留空则自动查找同一物体上的 IMotor")]
+    [SerializeField] private MonoBehaviour motorSource;
+    private IMotor _motor;
     [SerializeField] private PlayerLook look;
     [SerializeField] private PlayerBlockAgent agent;
     [SerializeField] private Hud_StarEnergy hud;
@@ -44,7 +46,8 @@ public class PlayerRespawnManager : MonoBehaviour
     private void Awake()
     {
         if (input == null) input = GetComponent<PlayerInputReader>();
-        if (motor == null) motor = GetComponent<FirstPersonMotor>();
+        _motor = motorSource as IMotor;
+        if (_motor == null) _motor = GetComponent<IMotor>();
         if (look == null) look = GetComponent<PlayerLook>();
         if (agent == null) agent = GetComponent<PlayerBlockAgent>();
         if (hud == null) hud = GetComponent<Hud_StarEnergy>();
@@ -236,7 +239,7 @@ public class PlayerRespawnManager : MonoBehaviour
 
     private void SetControlEnabled(bool enabled)
     {
-        if (motor != null) motor.enabled = enabled;
+        if (_motor != null) _motor.Enabled = enabled;
         if (look != null) look.enabled = enabled;
         if (agent != null) agent.enabled = enabled;
     }
