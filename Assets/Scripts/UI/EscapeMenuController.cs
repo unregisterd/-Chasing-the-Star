@@ -14,6 +14,16 @@ public class EscapeMenuController : MonoBehaviour
     [SerializeField] private TMP_Text detailText;
     [SerializeField] private CanvasGroup skillGroup;
 
+    [Header("遮罩呼吸")]
+    [Tooltip("留空会自动找 Menu Root/Dim")]
+    [SerializeField] private Image dimImage;
+    [Tooltip("最暗时的 alpha（0~255）")]
+    [Range(0f, 255f)] [SerializeField] private float dimAlphaMin = 25f;
+    [Tooltip("最亮时的 alpha（0~255）")]
+    [Range(0f, 255f)] [SerializeField] private float dimAlphaMax = 150f;
+    [Tooltip("一次明暗循环的秒数")]
+    [SerializeField] private float dimBreathPeriod = 5f;
+
     [Header("右侧导航")]
     [SerializeField] private Button resumeButton;
     [SerializeField] private Button skillsButton;
@@ -233,6 +243,7 @@ public class EscapeMenuController : MonoBehaviour
 
         UpdateHover(dt);
         UpdateFade(dt);
+        UpdateDimBreath();
     }
 
     private void UpdateHover(float dt)
@@ -283,6 +294,32 @@ public class EscapeMenuController : MonoBehaviour
             skillGroup.alpha = _skillsAlpha;
             skillGroup.blocksRaycasts = _skillsAlpha > 0.5f;
         }
+    }
+
+    private void UpdateDimBreath()
+    {
+        if (dimImage == null)
+        {
+            Transform found = transform.Find("Menu Root/Dim");
+
+            if (found != null)
+            {
+                dimImage = found.GetComponent<Image>();
+            }
+
+            if (dimImage == null)
+            {
+                return;
+            }
+        }
+
+        float period = Mathf.Max(0.5f, dimBreathPeriod);
+        float t = (Mathf.Sin(Time.unscaledTime * Mathf.PI * 2f / period) + 1f) * 0.5f;
+        float alpha = Mathf.Lerp(dimAlphaMin, dimAlphaMax, t) / 255f;
+
+        Color color = dimImage.color;
+        color.a = alpha;
+        dimImage.color = color;
     }
 
     private void UpdateFade(float dt)

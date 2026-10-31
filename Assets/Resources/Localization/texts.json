@@ -90,8 +90,8 @@
         "en": ""
       },
       "text": {
-        "zh": "消耗 1 点星光，跃起约 3 米高。\n——一跃而起的那一刻，我仿佛能看见星星。",
-        "en": "Spend 1 Star Energy to leap about 3 meters high\n——At the moment of the leap, it feels like you can see the stars."
+        "zh": "消耗 1 点星光，跃起约 3 米高。\n——“一跃而起的那一刻，我仿佛能看见星星。”",
+        "en": "Spend 1 Star Energy to leap about 3 meters high\n——\"At the moment of the leap, it feels like you can see the stars.\""
       },
       "note": "能力说明"
     },
@@ -129,8 +129,8 @@
         "en": ""
       },
       "text": {
-        "zh": "消耗 1 点星光，点亮半径 11 米内的隐藏方块或道路。\n——谁说前方没有路？",
-        "en": "Spend 1 Star Energy to reveal hidden blocks within 11 meters. \n——Who says there's no way ahead?)"
+        "zh": "消耗 1 点星光，点亮半径 11 米内的隐藏方块或道路。\n——“谁说前方没有路？”",
+        "en": "Spend 1 Star Energy to reveal hidden blocks within 11 meters. \n——\"Who says there's no way ahead?\""
       },
       "note": "能力说明"
     },
@@ -168,8 +168,8 @@
         "en": ""
       },
       "text": {
-        "zh": "消耗 1 点星光，让脚下的方块上升 2 米。\n——我的耐心或许不输于我的勇气。",
-        "en": "Spend 1 Star Energy to raise the block under your feet by 2 meters. \n——My patience might not be inferior to my courage."
+        "zh": "消耗 1 点星光，让脚下的方块上升 2 米。\n——“我的耐心或许不输于我的勇气。”",
+        "en": "Spend 1 Star Energy to raise the block under your feet by 2 meters. \n——\"My patience might not be inferior to my courage.\""
       },
       "note": "能力说明"
     },
@@ -207,8 +207,8 @@
         "en": ""
       },
       "text": {
-        "zh": "消耗 2 点星光，在前方生成一块临时平台（存在 10 秒，最后 2 秒闪烁）。\n——世界上最脆弱最宝贵的东西。",
-        "en": "Spend 2 Star Energy to summon a temporary platform ahead (lasts 10 seconds, blinks for the last 2). \n——The most fragile and precious thing in the world."
+        "zh": "消耗 2 点星光，在前方生成一块临时平台（存在 10 秒，最后 2 秒闪烁）。\n——“世界上最脆弱最宝贵的东西。”",
+        "en": "Spend 2 Star Energy to summon a temporary platform ahead (lasts 10 seconds, blinks for the last 2). \n——\"The most fragile and precious thing in the world.\""
       },
       "note": "能力说明"
     },
@@ -441,8 +441,8 @@
         "en": ""
       },
       "text": {
-        "zh": "按住 Shift 冲刺：奔跑速度提升。",
-        "en": "Hold Shift to sprint: you run faster and your leap carries farther."
+        "zh": "按住 Shift 冲刺：奔跑速度提升。\n——“或许这是最后的希望。”",
+        "en": "Hold Shift to sprint: you run faster and your leap carries farther.\n——\"Maybe this is the last hope.\""
       },
       "note": "技能说明"
     },
@@ -467,8 +467,8 @@
         "en": ""
       },
       "text": {
-        "zh": "按 R 重新开始游戏。前方的路并不好走，对吧。",
-        "en": "Press R to reset the game. The road ahead is not easy, is it?"
+        "zh": "按 R 重新开始游戏。\n——“前方的路并不好走，对吧。”",
+        "en": "Press R to reset the game. \n——\"The road ahead is not easy, is it?\""
       },
       "note": "技能说明"
     },
