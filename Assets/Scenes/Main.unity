@@ -2862,67 +2862,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1073649018}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &330691426
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 330691428}
-  - component: {fileID: 330691427}
-  m_Layer: 0
-  m_Name: EndingDirector
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!114 &330691427
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 330691426}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e0f23822cae60184caff897ecd025364, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  viewCamera: {fileID: 0}
-  playerRoot: {fileID: 0}
-  motorSource: {fileID: 1553991689}
-  look: {fileID: 0}
-  starSkyProgress: 0.85
-  endingSkybox: {fileID: 2100000, guid: 72deae4d18418f94688abef8e8483df0, type: 2}
-  endingFogColor: {r: 0.02, g: 0.02, b: 0.05, a: 1}
-  endingFogEnd: 300
-  fallDistance: 24
-  fallDuration: 6
-  lookBackAtTower: 1
-  fallFov: 45
-  holdDuration: 3
-  finalFov: 65
-  enableDebugKeys: 1
-  playKey: 19
-  restoreKey: 32
---- !u!4 &330691428
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 330691426}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &332108948
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16375,17 +16314,17 @@ PrefabInstance:
     - target: {fileID: 274547287138062850, guid: 57d057f6b948d42428c20ff4b428e407,
         type: 3}
       propertyPath: m_FollowOffset.x
-      value: -0.0800521
+      value: -0.08888568
       objectReference: {fileID: 0}
     - target: {fileID: 274547287138062850, guid: 57d057f6b948d42428c20ff4b428e407,
         type: 3}
       propertyPath: m_FollowOffset.y
-      value: 3.081447
+      value: 0.9485708
       objectReference: {fileID: 0}
     - target: {fileID: 274547287138062850, guid: 57d057f6b948d42428c20ff4b428e407,
         type: 3}
       propertyPath: m_FollowOffset.z
-      value: -1.43467
+      value: -3.263788
       objectReference: {fileID: 0}
     - target: {fileID: 1957900048000355860, guid: 57d057f6b948d42428c20ff4b428e407,
         type: 3}
@@ -22051,6 +21990,28 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1560827823}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1560930016 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 409656159680151349, guid: a3ddaec18ce02d3468e172bbaa72365e,
+    type: 3}
+  m_PrefabInstance: {fileID: 1648820262}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1560930021
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1560930016}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb9f3edee7374ee448d66649339d04f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textId: ending_jump_hint
+  radius: 1.8
+  holdSeconds: 6
+  playerOverride: {fileID: 0}
 --- !u!1001 &1597329292
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -22566,7 +22527,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 409656159680151349, guid: a3ddaec18ce02d3468e172bbaa72365e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1560930021}
   m_SourcePrefab: {fileID: 100100000, guid: a3ddaec18ce02d3468e172bbaa72365e, type: 3}
 --- !u!4 &1648820263 stripped
 Transform:
@@ -28746,7 +28711,6 @@ SceneRoots:
   - {fileID: 2078496409}
   - {fileID: 244590197}
   - {fileID: 781887454}
-  - {fileID: 330691428}
   - {fileID: 15328821}
   - {fileID: 1548835578}
   - {fileID: 475006148}
