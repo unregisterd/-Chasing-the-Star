@@ -46,6 +46,9 @@ GameObject:
   - component: {fileID: 7926758694849588640}
   - component: {fileID: 9114555722484589129}
   - component: {fileID: 2222927803919368665}
+  - component: {fileID: 4902967911956028021}
+  - component: {fileID: 4348529060921289027}
+  - component: {fileID: 2382395440481098465}
   m_Layer: 0
   m_Name: Player_Leading
   m_TagString: Untagged
@@ -95,7 +98,7 @@ CharacterController:
   m_StepOffset: 0.25
   m_SkinWidth: 0.02
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0.5, z: 0}
+  m_Center: {x: 0, y: 0.52, z: 0}
 --- !u!114 &9131816900794921738
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -234,6 +237,7 @@ MonoBehaviour:
   speedParameter: Speed
   jumpParameter: Jump
   groundedParameter: Grounded
+  fallingParameter: Falling
   animationBaseSpeed: 3.4
 --- !u!114 &9114555722484589129
 MonoBehaviour:
@@ -273,7 +277,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   input: {fileID: 0}
-  maxPoints: 6
+  maxPoints: 4
   startPoints: 0
   cooldown: 0.6
   courageHeight: 3.3
@@ -282,16 +286,78 @@ MonoBehaviour:
   patienceDuration: 1
   hopePlatformPrefab: {fileID: 0}
   hopePlatformType: {fileID: 0}
-  hopeForwardDistance: 2.5
-  hopeUpOffset: 0.8
+  hopeForwardDistance: 2.05
+  hopeUpOffset: 0.7
   hopeLifetime: 10
   hopeBlinkTime: 2
-  wisdomRadius: 12
+  wisdomRadius: 11
   palette: {fileID: 0}
   showDebugHud: 1
   useHitStop: 1
   hitStopDuration: 0.05
   hitStopScale: 0.05
+--- !u!114 &4902967911956028021
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8000536140273121624}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e4d54cd057260d4ea75c50e41bfa8db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  input: {fileID: 9131816900794921738}
+  motorSource: {fileID: 7926758694849588640}
+  look: {fileID: 0}
+  agent: {fileID: 9114555722484589129}
+  hud: {fileID: 0}
+  fallDeathDistance: 20
+  worldFloorY: -50
+  fadeOutDuration: 1.43
+  holdDuration: 4.24
+  deathClip: {fileID: 8300000, guid: 07f187e1d0dc437428c5c0cef74b02f8, type: 3}
+  deathVolume: 0.752
+  playIntro: 1
+  openingHold: 3.71
+  narrationHold: 4.5
+  narration2Hold: 3.5
+  hintHold: 2.5
+  introFadeIn: 2
+--- !u!114 &4348529060921289027
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8000536140273121624}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52342b641c165a14385d4270f54f9350, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  landingBurst: {fileID: 0}
+  heightOffset: 0.02
+--- !u!114 &2382395440481098465
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8000536140273121624}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b13f84a60c29804185526f8dd7d6c6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wallet: {fileID: 0}
+  anchor: 2
+  offset: {x: 32, y: 20}
+  scaleMultiplier: 1
+  orbSize: 30
+  orbGap: 15
+  padding: 12
 --- !u!1001 &9035469312952865961
 PrefabInstance:
   m_ObjectHideFlags: 0

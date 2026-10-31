@@ -33,6 +33,7 @@ public class EscapeMenuController : MonoBehaviour
         "ability_patience_desc",
         "ability_hope_desc",
         "skill_shift_desc",
+        "skill_R_desc"
     };
 
     [SerializeField] private string[] navKeys =
@@ -50,6 +51,7 @@ public class EscapeMenuController : MonoBehaviour
         "esc_skill_patience",
         "esc_skill_hope",
         "esc_skill_shift",
+        "esc_skill_R",
     };
 
     [SerializeField] private string defaultDetail = "把鼠标移到技能上，看看它能为骑士做什么。";
@@ -66,9 +68,9 @@ public class EscapeMenuController : MonoBehaviour
     private readonly List<TextMeshProUGUI> _navLabels = new List<TextMeshProUGUI>();
     private readonly List<TextMeshProUGUI> _skillLabels = new List<TextMeshProUGUI>();
     private readonly bool[] _navHoverTarget = new bool[4];
-    private readonly bool[] _skillHoverTarget = new bool[5];
+    private bool[] _skillHoverTarget = new bool[0];
     private readonly float[] _navHover = new float[4];
-    private readonly float[] _skillHover = new float[5];
+    private float[] _skillHover = new float[0];
 
     private bool _open;
     private bool _skillsExpanded;
@@ -88,6 +90,9 @@ public class EscapeMenuController : MonoBehaviour
 
     private void Awake()
     {
+        _skillHover = new float[Mathf.Max(1, skillButtons.Length)];
+        _skillHoverTarget = new bool[Mathf.Max(1, skillButtons.Length)];
+
         _navButtons.Add(resumeButton);
         _navButtons.Add(skillsButton);
         _navButtons.Add(mainMenuButton);
