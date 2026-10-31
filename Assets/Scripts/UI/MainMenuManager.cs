@@ -323,7 +323,6 @@ public class MainMenuManager : MonoBehaviour
 
     private void LoadGameScene()
     {
-        DOTween.KillAll();
         SceneManager.LoadScene(gameSceneName);
     }
 

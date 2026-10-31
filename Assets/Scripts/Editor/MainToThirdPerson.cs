@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 using UnityEditor.SceneManagement;
@@ -14,6 +14,8 @@ public static class MainToThirdPerson
     [MenuItem("Tools/Hero/Convert Main To Third Person")]
     public static void Convert()
     {
+        Selection.objects = new Object[0];
+
         if (!EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo())
         {
             return;
@@ -86,6 +88,7 @@ public static class MainToThirdPerson
             so.ApplyModifiedPropertiesWithoutUndo();
         }
 
+        Selection.objects = new Object[0];
         Object.DestroyImmediate(oldPlayer);
 
         CreateCameraRig();
