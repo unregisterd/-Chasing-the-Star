@@ -10,7 +10,7 @@ public class NpcSymbol : MonoBehaviour
     [Header("文案")]
     [Tooltip("NPC 台词 id，例如 npc_light_line")]
     [SerializeField] private string dialogueId = "npc_light_line";
-    [Tooltip("能力说明 id，例如 ability_courage_desc；留空则不显示")]
+    [Tooltip("能力说明 id，留空则不显示")]
     [SerializeField] private string abilityDescId = "ability_courage_desc";
 
     [Header("触发")]

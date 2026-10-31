@@ -19,7 +19,7 @@ public class EndingSequence : MonoBehaviour
     [SerializeField] private Transform playerOverride;
 
     [Header("文本")]
-    [SerializeField] private string narrationId = "ending_last_words";
+    [SerializeField] private string narrationId = "ending_narration";
     [SerializeField] private string hintId = "ending_jump_hint";
     [Tooltip("长旁白停留多久后换成「再跳一步」")]
     [SerializeField] private float narrationHold = 6f;
@@ -28,7 +28,7 @@ public class EndingSequence : MonoBehaviour
     [Tooltip("比如 1.5 米：一开始下落就立刻扣住死亡重生")]
     [SerializeField] private float fallLatchDistance = 1.5f;
     [Tooltip("下落超过这个距离就切场景（必须小于死亡判定的 20m）")]
-    [SerializeField] private float voidDropDistance = 6f;
+    [SerializeField] private float voidDropDistance = 4f;
     [SerializeField] private float fadeDuration = 1.2f;
     [SerializeField] private float blackHold = 0.3f;
     [SerializeField] private string nextScene = "MainEnding";
@@ -123,8 +123,15 @@ public class EndingSequence : MonoBehaviour
 
         if (UITextManager.Instance != null)
         {
-            UITextManager.Instance.ShowText(Loc.Text(narrationId), 0f, true);
+            UITextManager.Instance.ShowText(WithSpeaker(narrationId), 0f, true);
         }
+    }
+
+    private static string WithSpeaker(string id)
+    {
+        string line = Loc.Text(id);
+        string speaker = Loc.Speaker(id);
+        return string.IsNullOrEmpty(speaker) ? line : speaker + "\\n" + line;
     }
 
     private void ShowHint()

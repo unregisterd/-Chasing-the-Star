@@ -1739,6 +1739,60 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!1 &202733371
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 202733373}
+  - component: {fileID: 202733372}
+  m_Layer: 0
+  m_Name: EndingSequence
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &202733372
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 202733371}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3bbaba345d9bfd47a9df0913cbe5283, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  arrivalRadius: 1.8
+  playerOverride: {fileID: 0}
+  narrationId: ending_last_words
+  hintId: ending_jump_hint
+  narrationHold: 6
+  fallLatchDistance: 1.5
+  voidDropDistance: 4
+  fadeDuration: 1.2
+  blackHold: 0.3
+  nextScene: MainEnding
+--- !u!4 &202733373
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 202733371}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 3.7225478, y: 0.56699085, z: -6.6638513}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &229928453
 GameObject:
   m_ObjectHideFlags: 0
@@ -16314,17 +16368,17 @@ PrefabInstance:
     - target: {fileID: 274547287138062850, guid: 57d057f6b948d42428c20ff4b428e407,
         type: 3}
       propertyPath: m_FollowOffset.x
-      value: -0.08888568
+      value: -0.3450103
       objectReference: {fileID: 0}
     - target: {fileID: 274547287138062850, guid: 57d057f6b948d42428c20ff4b428e407,
         type: 3}
       propertyPath: m_FollowOffset.y
-      value: 0.9485708
+      value: 1.363361
       objectReference: {fileID: 0}
     - target: {fileID: 274547287138062850, guid: 57d057f6b948d42428c20ff4b428e407,
         type: 3}
       propertyPath: m_FollowOffset.z
-      value: -3.263788
+      value: -3.095515
       objectReference: {fileID: 0}
     - target: {fileID: 1957900048000355860, guid: 57d057f6b948d42428c20ff4b428e407,
         type: 3}
@@ -21528,6 +21582,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1652099419361163671, guid: 7424accf003f0104984f8d18233cb971,
+        type: 3}
+      propertyPath: m_Center.y
+      value: 0.52
+      objectReference: {fileID: 0}
     - target: {fileID: 2222927803919368665, guid: 7424accf003f0104984f8d18233cb971,
         type: 3}
       propertyPath: maxPoints
@@ -21704,7 +21763,7 @@ MonoBehaviour:
   narrationHold: 4.5
   narration2Hold: 3.5
   hintHold: 2.5
-  introFadeIn: 1.67
+  introFadeIn: 2
 --- !u!114 &1553991697
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21719,11 +21778,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   wallet: {fileID: 0}
   anchor: 2
-  offset: {x: 32, y: 30}
+  offset: {x: 32, y: 20}
   scaleMultiplier: 1
   orbSize: 30
   orbGap: 15
-  padding: 14
+  padding: 12
 --- !u!1 &1556018758
 GameObject:
   m_ObjectHideFlags: 0
@@ -22532,6 +22591,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1560930021}
+    - targetCorrespondingSourceObject: {fileID: 18440098064396117, guid: a3ddaec18ce02d3468e172bbaa72365e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1648820265}
   m_SourcePrefab: {fileID: 100100000, guid: a3ddaec18ce02d3468e172bbaa72365e, type: 3}
 --- !u!4 &1648820263 stripped
 Transform:
@@ -22539,6 +22602,28 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1648820262}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1648820265
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2124471019}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3bbaba345d9bfd47a9df0913cbe5283, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  arrivalRadius: 1.8
+  playerOverride: {fileID: 0}
+  narrationId: ending_last_words
+  hintId: ending_jump_hint
+  narrationHold: 6
+  fallLatchDistance: 1.5
+  voidDropDistance: 6
+  fadeDuration: 1.2
+  blackHold: 0.3
+  nextScene: MainEnding
 --- !u!1001 &1659660765
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -28240,6 +28325,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 668e21f47ca6dac44976fb885888d206, type: 3}
+--- !u!1 &2124471019 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 18440098064396117, guid: a3ddaec18ce02d3468e172bbaa72365e,
+    type: 3}
+  m_PrefabInstance: {fileID: 1648820262}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2125193166
 GameObject:
   m_ObjectHideFlags: 0
@@ -28716,3 +28807,4 @@ SceneRoots:
   - {fileID: 475006148}
   - {fileID: 1108584752}
   - {fileID: 1083899424}
+  - {fileID: 202733373}

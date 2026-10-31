@@ -484,19 +484,6 @@
         "en": "Quit"
       },
       "note": "主菜单按钮"
-    },
-    {
-      "id": "ending_last_words",
-      "type": "narration",
-      "speaker": {
-        "zh": "",
-        "en": ""
-      },
-      "text": {
-        "zh": "到了，这里就是世界的最高处。小骑士，前方什么也没有。或许星星只是一个传说，一个你梦中的美丽幻影，又或许……",
-        "en": "You have arrived. This is the highest place in the world. Little knight, there is nothing ahead. Perhaps the star was only a legend - a beautiful dream in your sleep. Or perhaps..."
-      },
-      "note": "终点长旁白"
     }
   ]
 }

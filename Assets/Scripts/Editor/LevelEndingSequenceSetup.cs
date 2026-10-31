@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 using UnityEditor.SceneManagement;
@@ -58,7 +58,7 @@ public static class LevelEndingSequenceSetup
         EndingSequence sequence = last.gameObject.AddComponent<EndingSequence>();
 
         SerializedObject so = new SerializedObject(sequence);
-        so.FindProperty("narrationId").stringValue = "ending_last_words";
+        so.FindProperty("narrationId").stringValue = "ending_narration";
         so.FindProperty("hintId").stringValue = "ending_jump_hint";
         so.FindProperty("narrationHold").floatValue = 6f;
         so.FindProperty("fallLatchDistance").floatValue = 1.5f;
