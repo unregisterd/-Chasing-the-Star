@@ -203,6 +203,12 @@ public static class HeroCharacterBuilder
         CinemachineComposer composer = vcam.AddCinemachineComponent<CinemachineComposer>();
         composer.m_TrackedObjectOffset = new Vector3(0f, 0.45f, 0f);
 
+        ThirdPersonCameraOrbit orbit = vcamObject.AddComponent<ThirdPersonCameraOrbit>();
+        SerializedObject orbitSo = new SerializedObject(orbit);
+        orbitSo.FindProperty("distance").floatValue = 3.4f;
+        orbitSo.FindProperty("startPitch").floatValue = 12f;
+        orbitSo.ApplyModifiedPropertiesWithoutUndo();
+
         CinemachineCollider collider = vcamObject.AddComponent<CinemachineCollider>();
         collider.m_MinimumDistanceFromTarget = 0.4f;
         collider.m_CameraRadius = 0.15f;
