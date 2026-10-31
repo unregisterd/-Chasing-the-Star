@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
@@ -31,6 +31,7 @@ public static class HeroRigSetup
         importer.SaveAndReimport();
 
         PatchHands(importer);
+        ConfigureClips(importer);
         importer.SaveAndReimport();
 
         RemapMaterials(importer);
@@ -73,6 +74,31 @@ public static class HeroRigSetup
             boneName = boneName,
             limit = new HumanLimit { useDefaultValues = true },
         });
+    }
+
+    private static void ConfigureClips(ModelImporter importer)
+    {
+        ModelImporterClipAnimation[] clips = importer.clipAnimations;
+
+        if (clips == null || clips.Length == 0)
+        {
+            clips = importer.defaultClipAnimations;
+        }
+
+        if (clips == null)
+        {
+            return;
+        }
+
+        for (int i = 0; i < clips.Length; i++)
+        {
+            bool isRun = clips[i].name == "Run";
+            clips[i].loopTime = isRun;
+            clips[i].loopPose = isRun;
+        }
+
+        importer.clipAnimations = clips;
+        Debug.Log("[Hero] 动画循环设置：Run 循环开启，其余保持单次。");
     }
 
     private static void RemapMaterials(ModelImporter importer)

@@ -1,4 +1,4 @@
-using System.IO;
+﻿using System.IO;
 using Cinemachine;
 using UnityEditor;
 using UnityEditor.SceneManagement;
@@ -19,6 +19,7 @@ public static class HeroCharacterBuilder
     [MenuItem("Tools/Hero/Build Player Character")]
     public static void Build()
     {
+        EnsureClipLoops();
         GameObject prefab = BuildPrefab();
 
         if (prefab == null)
@@ -29,8 +30,45 @@ public static class HeroCharacterBuilder
         BuildScene(prefab);
     }
 
-    private static GameObject BuildPrefab()
+    private static void EnsureClipLoops()
     {
+        ModelImporter importer = AssetImporter.GetAtPath(ModelPath) as ModelImporter;
+
+        if (importer == null)
+        {
+            return;
+        }
+
+        ModelImporterClipAnimation[] clips = importer.defaultClipAnimations;
+        bool changed = false;
+
+        for (int i = 0; i < clips.Length; i++)
+        {
+            bool isRun = clips[i].name == "Run" || clips[i].name.EndsWith("|Run");
+            bool isJump = clips[i].name == "Jump" || clips[i].name.EndsWith("|Jump");
+
+            if (isRun && !clips[i].loopTime)
+            {
+                clips[i].loopTime = true;
+                changed = true;
+            }
+
+            if (isJump && clips[i].loopTime)
+            {
+                clips[i].loopTime = false;
+                changed = true;
+            }
+        }
+
+        if (changed)
+        {
+            importer.clipAnimations = clips;
+            importer.SaveAndReimport();
+            Debug.Log("[HeroChar] 已把 Run 设为循环、Jump 设为单次播放。");
+        }
+    }
+
+    private static GameObject BuildPrefab()    {
         GameObject model = AssetDatabase.LoadAssetAtPath<GameObject>(ModelPath);
 
         if (model == null)
@@ -99,7 +137,9 @@ public static class HeroCharacterBuilder
             AssetDatabase.CreateFolder("Assets/Prefabs", "Player");
         }
 
+        Selection.activeObject = null;
         GameObject prefab = PrefabUtility.SaveAsPrefabAsset(root, PrefabPath);
+        Selection.activeObject = prefab;
         Object.DestroyImmediate(root);
         AssetDatabase.SaveAssets();
         return prefab;
@@ -155,13 +195,13 @@ public static class HeroCharacterBuilder
 
         CinemachineTransposer transposer = vcam.AddCinemachineComponent<CinemachineTransposer>();
         transposer.m_BindingMode = CinemachineTransposer.BindingMode.WorldSpace;
-        transposer.m_FollowOffset = new Vector3(0f, 0.55f, -2.1f);
+        transposer.m_FollowOffset = new Vector3(0f, 1.1f, -3.4f);
         transposer.m_XDamping = 0.12f;
         transposer.m_YDamping = 0.12f;
         transposer.m_ZDamping = 0.12f;
 
         CinemachineComposer composer = vcam.AddCinemachineComponent<CinemachineComposer>();
-        composer.m_TrackedObjectOffset = new Vector3(0f, 0.35f, 0f);
+        composer.m_TrackedObjectOffset = new Vector3(0f, 0.45f, 0f);
 
         CinemachineCollider collider = vcamObject.AddComponent<CinemachineCollider>();
         collider.m_MinimumDistanceFromTarget = 0.4f;
