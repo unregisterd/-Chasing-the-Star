@@ -1,4 +1,4 @@
-using System.IO;
+﻿using System.IO;
 using System.Linq;
 using UnityEditor;
 using UnityEditor.Animations;
@@ -31,6 +31,7 @@ public static class HeroTestBuilder
             return;
         }
 
+        Selection.objects = new Object[0];
         Scene scene = EditorSceneManager.NewScene(NewSceneSetup.EmptyScene, NewSceneMode.Single);
 
         CreateCamera();

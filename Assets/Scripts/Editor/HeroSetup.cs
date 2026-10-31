@@ -1,4 +1,4 @@
-using System.IO;
+﻿using System.IO;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
@@ -169,6 +169,7 @@ public static class HeroSetup
             return;
         }
 
+        Selection.objects = new Object[0];
         Scene scene = EditorSceneManager.NewScene(NewSceneSetup.EmptyScene, NewSceneMode.Single);
 
         GameObject cameraObject = new GameObject("Main Camera");
