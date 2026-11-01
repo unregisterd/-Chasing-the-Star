@@ -16665,17 +16665,17 @@ PrefabInstance:
     - target: {fileID: 274547287138062850, guid: 57d057f6b948d42428c20ff4b428e407,
         type: 3}
       propertyPath: m_FollowOffset.x
-      value: 1.090804
+      value: 2.186926
       objectReference: {fileID: 0}
     - target: {fileID: 274547287138062850, guid: 57d057f6b948d42428c20ff4b428e407,
         type: 3}
       propertyPath: m_FollowOffset.y
-      value: 1.479788
+      value: 2.181839
       objectReference: {fileID: 0}
     - target: {fileID: 274547287138062850, guid: 57d057f6b948d42428c20ff4b428e407,
         type: 3}
       propertyPath: m_FollowOffset.z
-      value: 2.860135
+      value: 1.420189
       objectReference: {fileID: 0}
     - target: {fileID: 1957900048000355860, guid: 57d057f6b948d42428c20ff4b428e407,
         type: 3}

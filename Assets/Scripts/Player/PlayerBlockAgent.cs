@@ -53,6 +53,7 @@ public class PlayerBlockAgent : MonoBehaviour
     private bool _respawning;
     private int _safePoints;
     private float _effectiveFallDepth = 3.5f;
+    private bool _walletBound;
 
     public Block StandingBlock => _standingBlock;
 
@@ -105,6 +106,8 @@ public class PlayerBlockAgent : MonoBehaviour
 
     private void Update()
     {
+        ResolveWallet();
+
         if (_respawning)
         {
             return;
@@ -210,16 +213,55 @@ public class PlayerBlockAgent : MonoBehaviour
         return Physics.Raycast(origin, Vector3.down, fallProbeDistance, groundMask, QueryTriggerInteraction.Ignore);
     }
 
-    private void SnapshotPoints()
+    private void ResolveWallet()
     {
         if (wallet == null)
         {
             wallet = GetComponent<AbilityWallet>();
         }
 
-        if (wallet != null)
+        if (wallet == null)
+        {
+            wallet = FindObjectOfType<AbilityWallet>();
+        }
+
+        if (wallet == null || _walletBound)
+        {
+            return;
+        }
+
+        wallet.Changed += HandleWalletChanged;
+        _walletBound = true;
+
+        if (wallet.Points > _safePoints)
         {
             _safePoints = wallet.Points;
+        }
+    }
+
+    private void HandleWalletChanged(int points, int maxPoints)
+    {
+        if (points > _safePoints)
+        {
+            _safePoints = points;
+        }
+    }
+
+    private void SnapshotPoints()
+    {
+        ResolveWallet();
+
+        if (wallet != null && wallet.Points > _safePoints)
+        {
+            _safePoints = wallet.Points;
+        }
+    }
+
+    private void OnDestroy()
+    {
+        if (wallet != null && _walletBound)
+        {
+            wallet.Changed -= HandleWalletChanged;
         }
     }
 
