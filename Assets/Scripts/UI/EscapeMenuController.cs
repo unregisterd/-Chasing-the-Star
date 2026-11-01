@@ -126,7 +126,6 @@ public class EscapeMenuController : MonoBehaviour
             }
 
             _navLabels.Add(navLabel);
-            AddHover(button, i, true);
 
             switch (i)
             {
@@ -156,7 +155,6 @@ public class EscapeMenuController : MonoBehaviour
             }
 
             _skillLabels.Add(skillLabel);
-            AddHover(button, i, false);
             button.onClick.AddListener(() => ShowSkill(index));
         }
 
@@ -262,10 +260,13 @@ public class EscapeMenuController : MonoBehaviour
 
     private void UpdateHover(float dt)
     {
+        Vector2 mouse = Mouse.current != null ? Mouse.current.position.ReadValue() : new Vector2(-9999f, -9999f);
+        bool interactive = _open && _alpha > 0.5f;
+
         for (int i = 0; i < 4; i++)
         {
-            float navTarget = _open && _navHoverTarget[i] ? 1f : 0f;
-            _navHover[i] = Mathf.MoveTowards(_navHover[i], navTarget, dt * 8f);
+            bool navHovered = interactive && i < _navButtons.Count && IsPointerOver(_navButtons[i], mouse);
+            _navHover[i] = Mathf.MoveTowards(_navHover[i], navHovered ? 1f : 0f, dt * 8f);
 
             if (i < _navLabels.Count && _navLabels[i] != null)
             {
@@ -281,11 +282,12 @@ public class EscapeMenuController : MonoBehaviour
         }
 
         int skillCount = Mathf.Min(_skillHover.Length, skillButtons.Length);
+        bool skillsVisible = interactive && _skillsExpanded && _skillsAlpha > 0.5f;
 
         for (int i = 0; i < skillCount; i++)
         {
-            float skillTarget = _open && _skillsExpanded && _skillHoverTarget[i] ? 1f : 0f;
-            _skillHover[i] = Mathf.MoveTowards(_skillHover[i], skillTarget, dt * 8f);
+            bool skillHovered = skillsVisible && IsPointerOver(skillButtons[i], mouse);
+            _skillHover[i] = Mathf.MoveTowards(_skillHover[i], skillHovered ? 1f : 0f, dt * 8f);
 
             if (i < _skillLabels.Count && _skillLabels[i] != null)
             {
@@ -308,6 +310,23 @@ public class EscapeMenuController : MonoBehaviour
             skillGroup.alpha = _skillsAlpha;
             skillGroup.blocksRaycasts = _skillsAlpha > 0.5f;
         }
+    }
+
+    private static bool IsPointerOver(Button button, Vector2 screenPoint)
+    {
+        if (button == null)
+        {
+            return false;
+        }
+
+        RectTransform rect = button.transform as RectTransform;
+
+        if (rect == null)
+        {
+            return false;
+        }
+
+        return RectTransformUtility.RectangleContainsScreenPoint(rect, screenPoint, null);
     }
 
     private void UpdateDimBreath()
@@ -335,7 +354,6 @@ public class EscapeMenuController : MonoBehaviour
         color.a = alpha;
         dimImage.color = color;
     }
-
     private void UpdateFade(float dt)
     {
         _alpha = Mathf.MoveTowards(_alpha, _open ? 1f : 0f, dt / Mathf.Max(0.01f, fadeDuration));
@@ -345,58 +363,6 @@ public class EscapeMenuController : MonoBehaviour
             menuGroup.alpha = _alpha;
             menuGroup.blocksRaycasts = _alpha > 0.5f;
             menuGroup.interactable = _alpha > 0.5f;
-        }
-    }
-
-    private void AddHover(Button button, int index, bool isNav)
-    {
-        EventTrigger trigger = button.GetComponent<EventTrigger>();
-
-        if (trigger == null)
-        {
-            trigger = button.gameObject.AddComponent<EventTrigger>();
-        }
-
-        EventTrigger.Entry enter = new EventTrigger.Entry { eventID = EventTriggerType.PointerEnter };
-        enter.callback.AddListener(_ => OnHoverEnter(index, isNav));
-        trigger.triggers.Add(enter);
-
-        EventTrigger.Entry exit = new EventTrigger.Entry { eventID = EventTriggerType.PointerExit };
-        exit.callback.AddListener(_ => OnHoverExit(index, isNav));
-        trigger.triggers.Add(exit);
-    }
-
-    private void OnHoverEnter(int index, bool isNav)
-    {
-        if (index < 0 || index >= 5)
-        {
-            return;
-        }
-
-        if (isNav)
-        {
-            _navHoverTarget[index] = true;
-        }
-        else
-        {
-            _skillHoverTarget[index] = true;
-        }
-    }
-
-    private void OnHoverExit(int index, bool isNav)
-    {
-        if (index < 0 || index >= 5)
-        {
-            return;
-        }
-
-        if (isNav)
-        {
-            _navHoverTarget[index] = false;
-        }
-        else
-        {
-            _skillHoverTarget[index] = false;
         }
     }
 
