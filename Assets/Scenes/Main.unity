@@ -16608,20 +16608,35 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 178819498729910704, guid: 57d057f6b948d42428c20ff4b428e407,
+        type: 3}
+      propertyPath: distance
+      value: 3.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 178819498729910704, guid: 57d057f6b948d42428c20ff4b428e407,
+        type: 3}
+      propertyPath: lookOffset.y
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 274547287138062850, guid: 57d057f6b948d42428c20ff4b428e407,
         type: 3}
       propertyPath: m_FollowOffset.x
-      value: -2.218132
+      value: 0.2720779
       objectReference: {fileID: 0}
     - target: {fileID: 274547287138062850, guid: 57d057f6b948d42428c20ff4b428e407,
         type: 3}
       propertyPath: m_FollowOffset.y
-      value: 1.492596
+      value: 1.357898
       objectReference: {fileID: 0}
     - target: {fileID: 274547287138062850, guid: 57d057f6b948d42428c20ff4b428e407,
         type: 3}
       propertyPath: m_FollowOffset.z
-      value: -2.100488
+      value: -3.322963
+      objectReference: {fileID: 0}
+    - target: {fileID: 718864998840168681, guid: 57d057f6b948d42428c20ff4b428e407,
+        type: 3}
+      propertyPath: m_TrackedObjectOffset.y
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 1957900048000355860, guid: 57d057f6b948d42428c20ff4b428e407,
         type: 3}
@@ -21838,7 +21853,7 @@ MonoBehaviour:
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0.5
+  m_MatchWidthOrHeight: 1
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -22013,7 +22028,7 @@ PrefabInstance:
     - target: {fileID: 2382395440481098465, guid: 7424accf003f0104984f8d18233cb971,
         type: 3}
       propertyPath: offset.y
-      value: 120
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 5233409557481446511, guid: 7424accf003f0104984f8d18233cb971,
         type: 3}
@@ -23452,9 +23467,9 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 66, y: 48}
+  m_AnchoredPosition: {x: 550, y: 0}
   m_SizeDelta: {x: 1100, y: 40}
-  m_Pivot: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0}
 --- !u!1001 &1689117981
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -28363,8 +28378,8 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 0.07
-      minScalar: 0.04
+      scalar: 0.09
+      minScalar: 0.05
       maxCurve:
         serializedVersion: 2
         m_Curve:
