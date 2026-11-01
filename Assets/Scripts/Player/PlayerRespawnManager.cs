@@ -35,6 +35,7 @@ public class PlayerRespawnManager : MonoBehaviour
     [SerializeField] private float introFadeIn = 1.2f;
 
     private bool _busy;
+    private bool _fallDeathEnabled = true;
     private bool _hasBeenGrounded;
     private float _controlEnabledAt;
     private float _lastSafeY;
@@ -63,6 +64,7 @@ public class PlayerRespawnManager : MonoBehaviour
         }
 
         _lastSafeY = transform.position.y;
+        _fallDeathEnabled = Difficulty.Current == DifficultyMode.Hard;
 
         if (deathClip == null)
         {
@@ -105,8 +107,8 @@ public class PlayerRespawnManager : MonoBehaviour
             return;
         }
 
-        bool fellTooFar = transform.position.y < _lastSafeY - fallDeathDistance;
-        bool belowFloor = transform.position.y < worldFloorY;
+        bool fellTooFar = _fallDeathEnabled && transform.position.y < _lastSafeY - fallDeathDistance;
+        bool belowFloor = _fallDeathEnabled && transform.position.y < worldFloorY;
 
         if (!fellTooFar && !belowFloor)
         {

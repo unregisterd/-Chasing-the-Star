@@ -36,6 +36,7 @@ public class EndingSequence : MonoBehaviour
     private Phase _phase;
     private Transform _player;
     private PlayerRespawnManager _respawn;
+    private PlayerBlockAgent _agent;
     private Hud_StarEnergy _hud;
     private float _phaseTime;
     private float _topY;
@@ -52,6 +53,7 @@ public class EndingSequence : MonoBehaviour
         _topY = block != null ? block.GetTopHeight() : transform.position.y;
 
         _respawn = FindObjectOfType<PlayerRespawnManager>();
+        _agent = FindObjectOfType<PlayerBlockAgent>();
         _hud = FindObjectOfType<Hud_StarEnergy>();
 
         if (playerOverride != null)
@@ -159,6 +161,11 @@ public class EndingSequence : MonoBehaviour
             if (_respawn != null)
             {
                 _respawn.enabled = false;
+            }
+
+            if (_agent != null)
+            {
+                _agent.SetAutoFallRespawn(false);
             }
 
             if (_hud != null)

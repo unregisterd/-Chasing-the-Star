@@ -510,6 +510,58 @@
         "en": "Quit"
       },
       "note": "主菜单按钮"
+    },
+    {
+      "id": "menu_lang_zh",
+      "type": "ui",
+      "speaker": {
+        "zh": "",
+        "en": ""
+      },
+      "text": {
+        "zh": "中文",
+        "en": "中文"
+      },
+      "note": "主菜单语言标签"
+    },
+    {
+      "id": "menu_lang_en",
+      "type": "ui",
+      "speaker": {
+        "zh": "",
+        "en": ""
+      },
+      "text": {
+        "zh": "English",
+        "en": "English"
+      },
+      "note": "主菜单语言标签"
+    },
+    {
+      "id": "menu_diff_hard",
+      "type": "ui",
+      "speaker": {
+        "zh": "",
+        "en": ""
+      },
+      "text": {
+        "zh": "困难",
+        "en": "Hard"
+      },
+      "note": "主菜单难度标签"
+    },
+    {
+      "id": "menu_diff_easy",
+      "type": "ui",
+      "speaker": {
+        "zh": "",
+        "en": ""
+      },
+      "text": {
+        "zh": "简单",
+        "en": "Easy"
+      },
+      "note": "主菜单难度标签"
     }
   ]
 }

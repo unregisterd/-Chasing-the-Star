@@ -17,6 +17,16 @@ public class PlayerBlockAgent : MonoBehaviour
     [Tooltip("绝对兜底高度（找不到最后方块时使用）")]
     [SerializeField] private float fallRespawnY = -12f;
 
+    [Header("简单模式回退")]
+    [Tooltip("简单模式下低于方块顶面多少米才回退")]
+    [SerializeField] private float easyFallDepth = 5f;
+    [Tooltip("向下探测多远还有方块；探到就不算掉出关卡（保护故意往下跳的路线）")]
+    [SerializeField] private float fallProbeDistance = 25f;
+    [Tooltip("回退时的淡出/淡入时长")]
+    [SerializeField] private float respawnFadeDuration = 0.15f;
+    [Tooltip("留空则自动查找 AbilityWallet")]
+    [SerializeField] private AbilityWallet wallet;
+
     [Header("落地音效")]
     [Tooltip("留空则从 Resources/Audio/step_land 自动加载")]
     [SerializeField] private AudioClip landingClip;
@@ -40,6 +50,9 @@ public class PlayerBlockAgent : MonoBehaviour
     private float _stepAccumulator;
     private float _lastLandingTime = -10f;
     private bool _wasGrounded = true;
+    private bool _respawning;
+    private int _safePoints;
+    private float _effectiveFallDepth = 3.5f;
 
     public Block StandingBlock => _standingBlock;
 
@@ -77,13 +90,34 @@ public class PlayerBlockAgent : MonoBehaviour
         {
             stepClip = landingClip;
         }
+
+        autoFallRespawn = Difficulty.IsEasy;
+        _effectiveFallDepth = Difficulty.IsEasy ? Mathf.Max(fallDepth, easyFallDepth) : fallDepth;
+
+        Debug.Log("[Agent] 难度：" + (Difficulty.IsEasy ? "简单（掉落后回退）" : "困难（掉落后重开）")
+                  + "，回退深度 " + _effectiveFallDepth.ToString("0.0") + "m");
+    }
+
+    public void SetAutoFallRespawn(bool value)
+    {
+        autoFallRespawn = value;
     }
 
     private void Update()
     {
+        if (_respawning)
+        {
+            return;
+        }
+
+        if (_motor != null && !_motor.Enabled)
+        {
+            return;
+        }
+
         if (ShouldRespawn())
         {
-            RespawnOnLastBlock();
+            StartCoroutine(RespawnRoutine());
             return;
         }
 
@@ -99,6 +133,7 @@ public class PlayerBlockAgent : MonoBehaviour
             _lastLandingTime = Time.time;
             _stepAccumulator = stepDistance * 0.5f;
             PlayLandingFeedback();
+            SnapshotPoints();
         }
 
         UpdateFootsteps();
@@ -155,10 +190,63 @@ public class PlayerBlockAgent : MonoBehaviour
 
         if (_lastStandingBlock != null && _lastStandingBlock.gameObject.activeInHierarchy)
         {
-            return transform.position.y < _lastStandingTop - fallDepth;
+            bool tooLow = transform.position.y < _lastStandingTop - _effectiveFallDepth;
+
+            if (!tooLow)
+            {
+                return false;
+            }
+
+            return !HasBlockBelow();
         }
 
         return transform.position.y < fallRespawnY;
+    }
+
+    private bool HasBlockBelow()
+    {
+        Vector3 origin = new Vector3(transform.position.x, GetFeetY() + 0.1f, transform.position.z);
+
+        return Physics.Raycast(origin, Vector3.down, fallProbeDistance, groundMask, QueryTriggerInteraction.Ignore);
+    }
+
+    private void SnapshotPoints()
+    {
+        if (wallet == null)
+        {
+            wallet = GetComponent<AbilityWallet>();
+        }
+
+        if (wallet != null)
+        {
+            _safePoints = wallet.Points;
+        }
+    }
+
+    private System.Collections.IEnumerator RespawnRoutine()
+    {
+        if (_respawning)
+        {
+            yield break;
+        }
+
+        _respawning = true;
+
+        if (ScreenFader.Instance != null)
+        {
+            yield return ScreenFader.Instance.Fade(1f, respawnFadeDuration);
+        }
+
+        RespawnOnLastBlock();
+
+        yield return null;
+
+        if (ScreenFader.Instance != null)
+        {
+            yield return ScreenFader.Instance.Fade(0f, respawnFadeDuration);
+        }
+
+        _respawning = false;
     }
 
     private void RespawnOnLastBlock()
@@ -180,7 +268,13 @@ public class PlayerBlockAgent : MonoBehaviour
 
         RespawnAt(target);
         _wasGrounded = true;
-        Debug.Log($"[Agent] 掉落，回到方块 {block.name}（顶面 {top:F1}m）");
+
+        if (wallet != null)
+        {
+            wallet.SetPoints(_safePoints);
+        }
+
+        Debug.Log($"[Agent] 掉落，回到方块 {block.name}（顶面 {top:F1}m），星光恢复到 {_safePoints}");
     }
 
     public void RespawnAt(Vector3 position)

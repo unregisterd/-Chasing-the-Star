@@ -1,4 +1,4 @@
-﻿using DG.Tweening;
+using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -42,6 +42,14 @@ public class MainMenuManager : MonoBehaviour
     [SerializeField] private TMP_Text startLabel;
     [SerializeField] private TMP_Text quitLabel;
     [SerializeField] private Button languageToggleButton;
+    [SerializeField] private Button difficultyToggleButton;
+    [SerializeField] private RawImage difficultyToggleIcon;
+    [SerializeField] private Texture2D difficultyEasyIcon;
+    [SerializeField] private Texture2D difficultyHardIcon;
+    [SerializeField] private TMP_Text difficultyHardLabel;
+    [SerializeField] private TMP_Text difficultyEasyLabel;
+    [SerializeField] private TMP_Text languageZhLabel;
+    [SerializeField] private TMP_Text languageEnLabel;
     [SerializeField] private RawImage languageToggleIcon;
     [SerializeField] private Texture2D languageEnIcon;
     [SerializeField] private Texture2D languageZhIcon;
@@ -68,6 +76,7 @@ public class MainMenuManager : MonoBehaviour
         PlayKnightBreathing();
 
         Loc.LanguageChanged += RefreshLocalized;
+        Difficulty.Changed += RefreshLocalized;
         RefreshLocalized();
 
         if (_bgmSource != null && _bgmSource.clip != null)
@@ -174,6 +183,12 @@ public class MainMenuManager : MonoBehaviour
             languageToggleButton.onClick.AddListener(ToggleLanguage);
             AddHover(languageToggleButton);
         }
+
+        if (difficultyToggleButton != null)
+        {
+            difficultyToggleButton.onClick.AddListener(Difficulty.Toggle);
+            AddHover(difficultyToggleButton);
+        }
     }
 
     private void ToggleLanguage()
@@ -184,24 +199,46 @@ public class MainMenuManager : MonoBehaviour
     private void RefreshLocalized()
     {
         if (titleLabel != null) titleLabel.text = Loc.Text("menu_title");
-        if (subtitleLabel != null) subtitleLabel.text = Loc.Language == "en" ? "逐星" : "CHASING THE STAR";
+        if (subtitleLabel != null) subtitleLabel.text = Loc.Language == "en" ? string.Empty : "CHASING THE STAR";
         if (startLabel != null) startLabel.text = Loc.Text("menu_start");
         if (quitLabel != null) quitLabel.text = Loc.Text("menu_quit");
 
+        Color active = new Color(1f, 0.95f, 0.88f, 1f);
+        Color inactive = new Color(1f, 1f, 1f, 0.42f);
+
+        bool english = Loc.Language == "en";
+
+        if (languageZhLabel != null) languageZhLabel.text = Loc.Text("menu_lang_zh");
+        if (languageEnLabel != null) languageEnLabel.text = Loc.Text("menu_lang_en");
+        if (languageZhLabel != null) languageZhLabel.color = english ? inactive : active;
+        if (languageEnLabel != null) languageEnLabel.color = english ? active : inactive;
+
         if (languageToggleIcon != null)
         {
-            Texture2D icon = Loc.Language == "en" ? languageEnIcon : languageZhIcon;
+            Texture2D icon = english ? languageEnIcon : languageZhIcon;
 
-            if (icon != null)
-            {
-                languageToggleIcon.texture = icon;
-            }
+            if (icon != null) languageToggleIcon.texture = icon;
+        }
+
+        bool easy = Difficulty.IsEasy;
+
+        if (difficultyHardLabel != null) difficultyHardLabel.text = Loc.Text("menu_diff_hard");
+        if (difficultyEasyLabel != null) difficultyEasyLabel.text = Loc.Text("menu_diff_easy");
+        if (difficultyHardLabel != null) difficultyHardLabel.color = easy ? inactive : active;
+        if (difficultyEasyLabel != null) difficultyEasyLabel.color = easy ? active : inactive;
+
+        if (difficultyToggleIcon != null)
+        {
+            Texture2D icon = easy ? difficultyEasyIcon : difficultyHardIcon;
+
+            if (icon != null) difficultyToggleIcon.texture = icon;
         }
     }
 
     private void OnDestroy()
     {
         Loc.LanguageChanged -= RefreshLocalized;
+        Difficulty.Changed -= RefreshLocalized;
     }
 
     private void AddHover(Button button)

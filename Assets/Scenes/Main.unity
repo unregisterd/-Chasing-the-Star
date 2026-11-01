@@ -16512,6 +16512,10 @@ MonoBehaviour:
   menuGroup: {fileID: 50330400}
   detailText: {fileID: 685053517}
   skillGroup: {fileID: 820588954}
+  dimImage: {fileID: 0}
+  dimAlphaMin: 50
+  dimAlphaMax: 150
+  dimBreathPeriod: 4.5
   resumeButton: {fileID: 734458625}
   skillsButton: {fileID: 2106376286}
   mainMenuButton: {fileID: 193788334}
@@ -16661,17 +16665,17 @@ PrefabInstance:
     - target: {fileID: 274547287138062850, guid: 57d057f6b948d42428c20ff4b428e407,
         type: 3}
       propertyPath: m_FollowOffset.x
-      value: -0.1585556
+      value: 1.090804
       objectReference: {fileID: 0}
     - target: {fileID: 274547287138062850, guid: 57d057f6b948d42428c20ff4b428e407,
         type: 3}
       propertyPath: m_FollowOffset.y
-      value: 1.753163
+      value: 1.479788
       objectReference: {fileID: 0}
     - target: {fileID: 274547287138062850, guid: 57d057f6b948d42428c20ff4b428e407,
         type: 3}
       propertyPath: m_FollowOffset.z
-      value: -2.908828
+      value: 2.860135
       objectReference: {fileID: 0}
     - target: {fileID: 1957900048000355860, guid: 57d057f6b948d42428c20ff4b428e407,
         type: 3}
@@ -22050,6 +22054,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7926758694849588640, guid: 7424accf003f0104984f8d18233cb971,
+        type: 3}
+      propertyPath: animationBaseSpeed
+      value: 3.6
       objectReference: {fileID: 0}
     - target: {fileID: 8000536140273121624, guid: 7424accf003f0104984f8d18233cb971,
         type: 3}
