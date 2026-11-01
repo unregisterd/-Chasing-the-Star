@@ -216,8 +216,8 @@
       "id": "ending_narration",
       "type": "narration",
       "speaker": {
-        "zh": "旁白",
-        "en": "Narrator"
+        "zh": "",
+        "en": ""
       },
       "text": {
         "zh": "到了，这里就是世界的最高处。小骑士，前方什么也没有。或许星星只是一个传说，一个你梦中的美丽幻影，又或许……",

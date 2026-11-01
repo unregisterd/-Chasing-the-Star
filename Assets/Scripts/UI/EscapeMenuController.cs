@@ -118,7 +118,14 @@ public class EscapeMenuController : MonoBehaviour
                 continue;
             }
 
-            _navLabels.Add(button.GetComponentInChildren<TextMeshProUGUI>());
+            TextMeshProUGUI navLabel = button.GetComponentInChildren<TextMeshProUGUI>();
+
+            if (navLabel != null)
+            {
+                navLabel.raycastTarget = false;
+            }
+
+            _navLabels.Add(navLabel);
             AddHover(button, i, true);
 
             switch (i)
@@ -141,7 +148,14 @@ public class EscapeMenuController : MonoBehaviour
             }
 
             int index = i;
-            _skillLabels.Add(button.GetComponentInChildren<TextMeshProUGUI>());
+            TextMeshProUGUI skillLabel = button.GetComponentInChildren<TextMeshProUGUI>();
+
+            if (skillLabel != null)
+            {
+                skillLabel.raycastTarget = false;
+            }
+
+            _skillLabels.Add(skillLabel);
             AddHover(button, i, false);
             button.onClick.AddListener(() => ShowSkill(index));
         }
