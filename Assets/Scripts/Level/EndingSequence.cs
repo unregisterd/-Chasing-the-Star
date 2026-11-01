@@ -44,10 +44,38 @@ public class EndingSequence : MonoBehaviour
 
     public static bool IsPlaying { get; private set; }
 
+    private static EndingSequence _active;
+
     private void Awake()
     {
+        if (_active != null && _active != this)
+        {
+            if (transform.position.y <= _active.transform.position.y)
+            {
+                Debug.LogWarning("[Ending] 场景里有多个 EndingSequence，已禁用较低的这个：" + name, this);
+                enabled = false;
+                return;
+            }
+
+            Debug.LogWarning("[Ending] 发现更高的 EndingSequence，禁用较低的那个：" + _active.name, this);
+            _active.enabled = false;
+        }
+
+        _active = this;
         IsPlaying = false;
         _phase = Phase.Idle;
+
+        if (Loc.Get(narrationId) == null)
+        {
+            Debug.LogWarning("[Ending] 找不到文本 " + narrationId + "，改用 ending_narration");
+            narrationId = "ending_narration";
+        }
+
+        if (Loc.Get(hintId) == null)
+        {
+            Debug.LogWarning("[Ending] 找不到文本 " + hintId + "，改用 ending_jump_hint");
+            hintId = "ending_jump_hint";
+        }
 
         Block block = GetComponent<Block>();
         _topY = block != null ? block.GetTopHeight() : transform.position.y;
@@ -72,6 +100,11 @@ public class EndingSequence : MonoBehaviour
 
     private void OnDestroy()
     {
+        if (_active == this)
+        {
+            _active = null;
+        }
+
         IsPlaying = false;
     }
 

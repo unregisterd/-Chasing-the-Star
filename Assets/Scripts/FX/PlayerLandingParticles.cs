@@ -3,7 +3,7 @@
 public class PlayerLandingParticles : MonoBehaviour
 {
     [SerializeField] private ParticleSystem landingBurst;
-    [SerializeField] private float heightOffset = 0.02f;
+    [SerializeField] private float heightOffset = 0.01f;
 
     private CharacterController _controller;
     private RippleEmitter _ripple;
