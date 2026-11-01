@@ -156,7 +156,6 @@ public class EscapeMenuController : MonoBehaviour
             }
 
             _skillLabels.Add(skillLabel);
-            AddHover(button, i, false);
             button.onClick.AddListener(() => ShowSkill(index));
         }
 
@@ -284,7 +283,10 @@ public class EscapeMenuController : MonoBehaviour
 
         for (int i = 0; i < skillCount; i++)
         {
-            float skillTarget = _open && _skillsExpanded && _skillHoverTarget[i] ? 1f : 0f;
+            bool skillHovered = _open && _skillsExpanded && _skillsAlpha > 0.5f && IsPointerOver(skillButtons[i]);
+            _skillHoverTarget[i] = skillHovered;
+
+            float skillTarget = skillHovered ? 1f : 0f;
             _skillHover[i] = Mathf.MoveTowards(_skillHover[i], skillTarget, dt * 8f);
 
             if (i < _skillLabels.Count && _skillLabels[i] != null)
@@ -334,6 +336,23 @@ public class EscapeMenuController : MonoBehaviour
         Color color = dimImage.color;
         color.a = alpha;
         dimImage.color = color;
+    }
+
+    private static bool IsPointerOver(Button button)
+    {
+        if (button == null || Mouse.current == null)
+        {
+            return false;
+        }
+
+        RectTransform rect = button.transform as RectTransform;
+
+        if (rect == null)
+        {
+            return false;
+        }
+
+        return RectTransformUtility.RectangleContainsScreenPoint(rect, Mouse.current.position.ReadValue(), null);
     }
 
     private void UpdateFade(float dt)
