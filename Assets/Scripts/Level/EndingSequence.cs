@@ -163,7 +163,7 @@ public class EndingSequence : MonoBehaviour
 
         if (UITextManager.Instance != null)
         {
-            UITextManager.Instance.ShowText(WithSpeaker(narrationId), 0f, true);
+            UITextManager.Instance.ShowCenter(WithSpeaker(narrationId), 0f, true);
         }
     }
 
@@ -215,6 +215,7 @@ public class EndingSequence : MonoBehaviour
             {
                 UITextManager.Instance.SetControlsVisible(false);
                 UITextManager.Instance.ShowText(string.Empty, 0f, false);
+                UITextManager.Instance.HideCenter();
             }
         }
 

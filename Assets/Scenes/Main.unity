@@ -16611,17 +16611,17 @@ PrefabInstance:
     - target: {fileID: 274547287138062850, guid: 57d057f6b948d42428c20ff4b428e407,
         type: 3}
       propertyPath: m_FollowOffset.x
-      value: -2.763854
+      value: -0.5769292
       objectReference: {fileID: 0}
     - target: {fileID: 274547287138062850, guid: 57d057f6b948d42428c20ff4b428e407,
         type: 3}
       propertyPath: m_FollowOffset.y
-      value: 1.406715
+      value: 1.564683
       objectReference: {fileID: 0}
     - target: {fileID: 274547287138062850, guid: 57d057f6b948d42428c20ff4b428e407,
         type: 3}
       propertyPath: m_FollowOffset.z
-      value: 1.393652
+      value: -2.962924
       objectReference: {fileID: 0}
     - target: {fileID: 1957900048000355860, guid: 57d057f6b948d42428c20ff4b428e407,
         type: 3}
@@ -21954,17 +21954,17 @@ PrefabInstance:
     - target: {fileID: 5233409557481446511, guid: 7424accf003f0104984f8d18233cb971,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.732
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 5233409557481446511, guid: 7424accf003f0104984f8d18233cb971,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.23
+      value: 141.06
       objectReference: {fileID: 0}
     - target: {fileID: 5233409557481446511, guid: 7424accf003f0104984f8d18233cb971,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -6.566
+      value: -16.442
       objectReference: {fileID: 0}
     - target: {fileID: 5233409557481446511, guid: 7424accf003f0104984f8d18233cb971,
         type: 3}
@@ -22854,7 +22854,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   arrivalRadius: 1.8
   playerOverride: {fileID: 0}
-  narrationId: ending_last_words
+  narrationId: ending_narration
   hintId: ending_jump_hint
   narrationHold: 6
   fallLatchDistance: 1.5
