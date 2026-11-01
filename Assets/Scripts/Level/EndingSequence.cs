@@ -65,6 +65,11 @@ public class EndingSequence : MonoBehaviour
         IsPlaying = false;
         _phase = Phase.Idle;
 
+        if (narrationId == "ending_last_words")
+        {
+            narrationId = "ending_narration";
+        }
+
         if (Loc.Get(narrationId) == null)
         {
             Debug.LogWarning("[Ending] 找不到文本 " + narrationId + "，改用 ending_narration");
