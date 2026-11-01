@@ -23,6 +23,17 @@ public class FloatBob : MonoBehaviour
     private float _phase;
     private float _yawPhase;
 
+    public void Configure(float newAmplitude, float newPeriod, float newYawAmplitude = -1f)
+    {
+        amplitude = Mathf.Max(0f, newAmplitude);
+        period = Mathf.Max(0.5f, newPeriod);
+
+        if (newYawAmplitude >= 0f)
+        {
+            yawAmplitude = newYawAmplitude;
+        }
+    }
+
     private void Awake()
     {
         _origin = transform.localPosition;

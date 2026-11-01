@@ -22,6 +22,13 @@ public class NpcSymbol : MonoBehaviour
     [SerializeField] private float worldTextWidth = 6f;
     [SerializeField] private bool createRipples = true;
 
+    [Header("视觉浮动")]
+    [Tooltip("自动给视觉子物体加轻微上下浮动")]
+    [SerializeField] private bool autoFloatVisual = true;
+    [SerializeField] private float bobAmplitude = 0.04f;
+    [SerializeField] private float bobPeriod = 5f;
+    [SerializeField] private float bobYawAmplitude = 5f;
+
     [SerializeField] private AbilityWallet walletOverride;
     [Header("音效")]
     [Tooltip("留空则从 Resources/Audio/SFX/star_pickup 自动加载")]
@@ -54,6 +61,7 @@ public class NpcSymbol : MonoBehaviour
         }
 
         CreateWorldText();
+        SetupVisualFloat();
 
         _audio = GetComponent<AudioSource>();
 
@@ -256,6 +264,46 @@ public class NpcSymbol : MonoBehaviour
         {
             _worldText.gameObject.SetActive(false);
         }
+    }
+
+    private void SetupVisualFloat()
+    {
+        if (!autoFloatVisual)
+        {
+            return;
+        }
+
+        Transform visual = null;
+
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            Transform child = transform.GetChild(i);
+
+            if (child.name == "WorldText")
+            {
+                continue;
+            }
+
+            if (child.GetComponentInChildren<Renderer>(true) != null)
+            {
+                visual = child;
+                break;
+            }
+        }
+
+        if (visual == null)
+        {
+            return;
+        }
+
+        FloatBob bob = visual.GetComponent<FloatBob>();
+
+        if (bob == null)
+        {
+            bob = visual.gameObject.AddComponent<FloatBob>();
+        }
+
+        bob.Configure(bobAmplitude, bobPeriod, bobYawAmplitude);
     }
 
     private void CreateWorldText()
