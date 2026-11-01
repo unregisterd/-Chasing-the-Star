@@ -16611,17 +16611,17 @@ PrefabInstance:
     - target: {fileID: 274547287138062850, guid: 57d057f6b948d42428c20ff4b428e407,
         type: 3}
       propertyPath: m_FollowOffset.x
-      value: 3.332546
+      value: 3.234791
       objectReference: {fileID: 0}
     - target: {fileID: 274547287138062850, guid: 57d057f6b948d42428c20ff4b428e407,
         type: 3}
       propertyPath: m_FollowOffset.y
-      value: 0.5880657
+      value: 0.9485691
       objectReference: {fileID: 0}
     - target: {fileID: 274547287138062850, guid: 57d057f6b948d42428c20ff4b428e407,
         type: 3}
       propertyPath: m_FollowOffset.z
-      value: 0.3291061
+      value: 0.4431094
       objectReference: {fileID: 0}
     - target: {fileID: 1957900048000355860, guid: 57d057f6b948d42428c20ff4b428e407,
         type: 3}
