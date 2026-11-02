@@ -562,58 +562,6 @@
         "en": "Easy"
       },
       "note": "主菜单难度标签"
-    },
-    {
-      "id": "secret_1",
-      "type": "narration",
-      "speaker": {
-        "zh": "",
-        "en": ""
-      },
-      "text": {
-        "zh": "有人曾在这里徘徊了三百年，只为看一次日落。",
-        "en": "Someone lingered here for three hundred years, just to watch the sun set once."
-      },
-      "note": "隐藏碑文"
-    },
-    {
-      "id": "secret_2",
-      "type": "narration",
-      "speaker": {
-        "zh": "",
-        "en": ""
-      },
-      "text": {
-        "zh": "石头记得每一次落脚，风记得每一次犹豫。",
-        "en": "The stones remember every footfall. The wind remembers every hesitation."
-      },
-      "note": "隐藏碑文"
-    },
-    {
-      "id": "secret_3",
-      "type": "narration",
-      "speaker": {
-        "zh": "",
-        "en": ""
-      },
-      "text": {
-        "zh": "在这条路的尽头，曾有另一个骑士停留。他也没有找到星星。",
-        "en": "At the end of this path, another knight once stopped. He did not find the star either."
-      },
-      "note": "隐藏碑文"
-    },
-    {
-      "id": "secret_all",
-      "type": "narration",
-      "speaker": {
-        "zh": "",
-        "en": ""
-      },
-      "text": {
-        "zh": "你听见了所有的回声。它们说：继续向上。",
-        "en": "You have heard every echo. They say: keep climbing."
-      },
-      "note": "隐藏碑文"
     }
   ]
 }
