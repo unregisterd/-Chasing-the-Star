@@ -54,12 +54,15 @@ public class PlayerBlockAgent : MonoBehaviour
     private int _safePoints;
     private float _effectiveFallDepth = 3.5f;
     private bool _walletBound;
+    private float _fallSpeed;
 
     public Block StandingBlock => _standingBlock;
 
     public bool IsGrounded => _controller != null && _controller.isGrounded;
 
     public event Action<Block> StandingBlockChanged;
+
+    public event Action<float> Landed;
 
     private void Awake()
     {
@@ -95,6 +98,11 @@ public class PlayerBlockAgent : MonoBehaviour
         autoFallRespawn = Difficulty.IsEasy;
         _effectiveFallDepth = Difficulty.IsEasy ? Mathf.Max(fallDepth, easyFallDepth) : fallDepth;
 
+        if (GetComponent<LandingFeedback>() == null)
+        {
+            gameObject.AddComponent<LandingFeedback>();
+        }
+
         Debug.Log("[Agent] 难度：" + (Difficulty.IsEasy ? "简单（掉落后回退）" : "困难（掉落后重开）")
                   + "，回退深度 " + _effectiveFallDepth.ToString("0.0") + "m");
     }
@@ -127,6 +135,7 @@ public class PlayerBlockAgent : MonoBehaviour
         if (!_controller.isGrounded)
         {
             _wasGrounded = false;
+            _fallSpeed = Mathf.Max(_fallSpeed, -_controller.velocity.y);
             return;
         }
 
@@ -137,6 +146,10 @@ public class PlayerBlockAgent : MonoBehaviour
             _stepAccumulator = stepDistance * 0.5f;
             PlayLandingFeedback();
             SnapshotPoints();
+
+            float impact = _fallSpeed;
+            _fallSpeed = 0f;
+            Landed?.Invoke(impact);
         }
 
         UpdateFootsteps();

@@ -1,4 +1,4 @@
-using Cinemachine;
+﻿using Cinemachine;
 using UnityEngine;
 
 [DisallowMultipleComponent]
@@ -24,6 +24,9 @@ public class ThirdPersonCameraOrbit : MonoBehaviour
     private CinemachineTransposer _transposer;
     private CinemachineComposer _composer;
     private float _yaw;
+    private float _shakeStrength;
+    private float _shakeDecay;
+    private Vector3 _shakeOffset;
     private float _pitch;
 
     private void Awake()
@@ -36,6 +39,13 @@ public class ThirdPersonCameraOrbit : MonoBehaviour
         _pitch = startPitch;
 
         Apply();
+    }
+
+    public void Shake(float strength, float duration = 0.18f)
+    {
+        float safeDuration = Mathf.Max(0.05f, duration);
+        _shakeStrength = Mathf.Max(_shakeStrength, strength);
+        _shakeDecay = _shakeStrength / safeDuration;
     }
 
     private void Start()
@@ -62,14 +72,30 @@ public class ThirdPersonCameraOrbit : MonoBehaviour
             _pitch = Mathf.Clamp(_pitch, minPitch, maxPitch);
         }
 
+        UpdateShake();
         Apply();
+    }
+
+    private void UpdateShake()
+    {
+        if (_shakeStrength <= 0f)
+        {
+            _shakeOffset = Vector3.zero;
+            return;
+        }
+
+        _shakeStrength = Mathf.Max(0f, _shakeStrength - _shakeDecay * Time.unscaledDeltaTime);
+        _shakeOffset = new Vector3(
+            Random.Range(-1f, 1f),
+            Random.Range(-1f, 1f),
+            Random.Range(-1f, 1f)) * _shakeStrength;
     }
 
     private void Apply()
     {
         if (_transposer != null)
         {
-            _transposer.m_FollowOffset = Quaternion.Euler(_pitch, _yaw, 0f) * new Vector3(0f, 0f, -distance);
+            _transposer.m_FollowOffset = Quaternion.Euler(_pitch, _yaw, 0f) * new Vector3(0f, 0f, -distance) + _shakeOffset;
         }
 
         if (_composer != null)

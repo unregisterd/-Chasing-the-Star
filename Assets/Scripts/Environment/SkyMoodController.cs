@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class SkyMoodController : MonoBehaviour
 {
@@ -43,6 +43,8 @@ public class SkyMoodController : MonoBehaviour
     [SerializeField] private float fogEndNight = 95f;
 
     public float Blend { get; private set; }
+
+    public float BackdropRoll { get; set; }
     public float Target { get; set; }
 
     public Color RippleColor => Color.Lerp(duskRipple, nightRipple, Blend);
@@ -204,7 +206,7 @@ public class SkyMoodController : MonoBehaviour
         float width = height * _camera.aspect * backdropPadding;
 
         _backdropQuad.position = _camera.transform.position + _camera.transform.forward * backdropDistance;
-        _backdropQuad.rotation = _camera.transform.rotation;
+        _backdropQuad.rotation = _camera.transform.rotation * Quaternion.Euler(0f, 0f, BackdropRoll);
         _backdropQuad.localScale = new Vector3(width, height, 1f);
     }
 

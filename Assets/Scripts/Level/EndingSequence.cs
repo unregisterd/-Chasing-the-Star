@@ -87,6 +87,11 @@ public class EndingSequence : MonoBehaviour
 
         _respawn = FindObjectOfType<PlayerRespawnManager>();
         _agent = FindObjectOfType<PlayerBlockAgent>();
+
+        if (FindObjectOfType<EndingAtmosphere>() == null)
+        {
+            gameObject.AddComponent<EndingAtmosphere>();
+        }
         _hud = FindObjectOfType<Hud_StarEnergy>();
 
         if (playerOverride != null)
