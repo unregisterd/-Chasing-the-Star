@@ -128,6 +128,10 @@ MonoBehaviour:
   worldTextHeight: 2.2
   worldTextWidth: 6
   createRipples: 1
+  autoFloatVisual: 1
+  bobAmplitude: 0.1
+  bobPeriod: 5
+  bobYawAmplitude: 10
   walletOverride: {fileID: 0}
   pickupClip: {fileID: 0}
   pickupVolume: 0.8
