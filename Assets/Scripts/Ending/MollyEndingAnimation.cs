@@ -30,6 +30,7 @@ public sealed class MollyEndingAnimation : MonoBehaviour
     private AudioSource[] oldMusic;
     private AudioSource endingMusic;
     private GameObject skyQuad;
+    private Vector3 skyBaseScale;
     private Material skyMaterial;
     private Texture2D lightTexture;
     private Vector3 startPosition, center;
@@ -99,6 +100,7 @@ public sealed class MollyEndingAnimation : MonoBehaviour
             skyQuad.transform.localRotation = Quaternion.identity;
             float height = 1600 * Mathf.Tan(cameraView.fieldOfView * .5f * Mathf.Deg2Rad);
             skyQuad.transform.localScale = new Vector3(height * cameraView.aspect * 2, height * 2, 1);
+            skyBaseScale = skyQuad.transform.localScale;
         }
         AudioClip clip = Resources.Load<AudioClip>("Audio/BGM/ending");
         if (clip) {
@@ -133,6 +135,7 @@ public sealed class MollyEndingAnimation : MonoBehaviour
                 MollyEndingFinalLine.Show();
                 finalLineShown = true;
             }
+            UpdateSkyMotion(elapsed);
             player.position = startPosition + Vector3.down * (.5f * Mathf.Max(.1f, gravity) * elapsed * elapsed);
             Vector3 direction = center - cameraView.transform.position;
             if (direction.sqrMagnitude > 1) {
@@ -153,6 +156,27 @@ public sealed class MollyEndingAnimation : MonoBehaviour
         if (ScreenFader.Instance != null) yield return ScreenFader.Instance.Fade(1f, .8f);
         SceneManager.LoadScene(returnScene);
     }
+    private void UpdateSkyMotion(float time)
+    {
+        if (skyQuad == null)
+        {
+            return;
+        }
+
+        float fall = .5f * Mathf.Max(.1f, gravity) * time * time;
+
+        skyQuad.transform.localPosition = new Vector3(
+            Mathf.Sin(time * 0.15f) * 14f,
+            fall * 0.16f,
+            800f);
+
+        float roll = time * 0.35f + Mathf.Sin(time * 0.1f) * 2.5f;
+        skyQuad.transform.localRotation = Quaternion.Euler(0f, 0f, roll);
+
+        float scaleMul = 1f + time * 0.004f;
+        skyQuad.transform.localScale = skyBaseScale * scaleMul;
+    }
+
     private static bool SkipPressed()
     {
         return Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0);
