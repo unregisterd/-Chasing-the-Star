@@ -239,6 +239,19 @@
       "note": "系统提示"
     },
     {
+      "id": "ending_final_line",
+      "type": "narration",
+      "speaker": {
+        "zh": "",
+        "en": ""
+      },
+      "text": {
+        "zh": "原来，那颗永不熄灭的星星，\n就是我走过的路。",
+        "en": "So the star that never goes out... was the road I walked all along."
+      },
+      "note": "结局最后一句，星空中淡入"
+    },
+    {
       "id": "ending_question",
       "type": "narration",
       "speaker": {

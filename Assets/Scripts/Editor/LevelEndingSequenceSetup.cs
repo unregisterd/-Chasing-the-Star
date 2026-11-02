@@ -62,10 +62,7 @@ public static class LevelEndingSequenceSetup
         so.FindProperty("hintId").stringValue = "ending_jump_hint";
         so.FindProperty("narrationHold").floatValue = 6f;
         so.FindProperty("fallLatchDistance").floatValue = 1.5f;
-        so.FindProperty("voidDropDistance").floatValue = 6f;
-        so.FindProperty("fadeDuration").floatValue = 1.2f;
-        so.FindProperty("blackHold").floatValue = 0.3f;
-        so.FindProperty("nextScene").stringValue = "MainEnding";
+        so.FindProperty("voidDropDistance").floatValue = 4f;
         so.ApplyModifiedPropertiesWithoutUndo();
 
         EditorSceneManager.MarkSceneDirty(scene);
@@ -74,8 +71,9 @@ public static class LevelEndingSequenceSetup
         RegisterScenes();
 
         Debug.Log("[Ending] 已挂在最高方块 " + last.name + "（顶面 " + last.GetTopHeight().ToString("0.0") + "m）"
-                  + "\n流程：靠近 → 长旁白 → 6s 后「再跳一步」→ 下坠超过 6m → 黑屏 1.2s → MainEnding"
-                  + "\nMainEnding 已加入 Build Settings。");
+                  + "\n流程：靠近 → 长旁白 → 6s 后「再跳一步」→ 下坠超过 4m → 原地星空坠落演出（Esc/空格/点击可跳过）"
+                  + "\n→ 结尾句淡入 → 任意键返回主菜单"
+                  + "\nMainEnding 为独立预览场景，已加入 Build Settings。");
     }
 
     private static void RegisterScenes()

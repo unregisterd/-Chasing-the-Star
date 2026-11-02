@@ -61,6 +61,10 @@ public class MainMenuManager : MonoBehaviour
 
     private void Awake()
     {
+        // 从游戏 / 结局场景回到主菜单时，必须解除鼠标锁定并恢复指针
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+
         SetupSky();
         SetupAudio();
     }

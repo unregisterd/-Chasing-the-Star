@@ -1,6 +1,5 @@
-﻿using System.Collections;
+using System.Collections;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 [DisallowMultipleComponent]
 public class EndingSequence : MonoBehaviour
@@ -24,15 +23,14 @@ public class EndingSequence : MonoBehaviour
     [Tooltip("长旁白停留多久后换成「再跳一步」")]
     [SerializeField] private float narrationHold = 6f;
 
-    [Header("坠落与转场")]
+    [Header("坠落与结尾动画")]
     [Tooltip("比如 1.5 米：一开始下落就立刻扣住死亡重生")]
     [SerializeField] private float fallLatchDistance = 1.5f;
-    [Tooltip("下落超过这个距离就切场景（必须小于死亡判定的 20m）")]
+    [Tooltip("下落超过这个距离就播放结尾动画（必须小于死亡判定的 20m）")]
     [SerializeField] private float voidDropDistance = 4f;
-    [SerializeField] private float fadeDuration = 1.2f;
-    [SerializeField] private float blackHold = 0.3f;
-    [SerializeField] private string nextScene = "MainEnding";
 
+    // molly | Play the character-bound starfall after the existing final-platform trigger.
+    private MollyEndingAnimation _mollyEnding;
     private Phase _phase;
     private Transform _player;
     private PlayerRespawnManager _respawn;
@@ -63,6 +61,8 @@ public class EndingSequence : MonoBehaviour
 
         _active = this;
         IsPlaying = false;
+        _mollyEnding = GetComponent<MollyEndingAnimation>();
+        if (_mollyEnding == null) _mollyEnding = gameObject.AddComponent<MollyEndingAnimation>();
         _phase = Phase.Idle;
 
         if (narrationId == "ending_last_words")
@@ -87,11 +87,6 @@ public class EndingSequence : MonoBehaviour
 
         _respawn = FindObjectOfType<PlayerRespawnManager>();
         _agent = FindObjectOfType<PlayerBlockAgent>();
-
-        if (FindObjectOfType<EndingAtmosphere>() == null)
-        {
-            gameObject.AddComponent<EndingAtmosphere>();
-        }
         _hud = FindObjectOfType<Hud_StarEnergy>();
 
         if (playerOverride != null)
@@ -236,22 +231,11 @@ public class EndingSequence : MonoBehaviour
 
     private IEnumerator RunTransition()
     {
-        if (ScreenFader.Instance != null)
+        // molly | The final star and realization stay in this camera view.
+        if (_mollyEnding != null)
         {
-            yield return ScreenFader.Instance.Fade(1f, fadeDuration);
+            yield return StartCoroutine(_mollyEnding.Play(_player));
         }
-
-        if (blackHold > 0f)
-        {
-            yield return new WaitForSeconds(blackHold);
-        }
-
-        if (ScreenFader.Instance != null)
-        {
-            ScreenFader.Instance.SetAlpha(1f);
-        }
-
-        SceneManager.LoadScene(nextScene);
     }
 
     private void OnValidate()
