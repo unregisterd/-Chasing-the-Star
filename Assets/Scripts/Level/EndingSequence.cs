@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 
 [DisallowMultipleComponent]
@@ -37,6 +37,7 @@ public class EndingSequence : MonoBehaviour
     private PlayerBlockAgent _agent;
     private Hud_StarEnergy _hud;
     private float _phaseTime;
+    private float _hintDelay = 6f;
     private float _topY;
     private bool _fallLatched;
 
@@ -137,7 +138,7 @@ public class EndingSequence : MonoBehaviour
                     break;
                 }
 
-                if (_phaseTime >= narrationHold)
+                if (_phaseTime >= _hintDelay)
                 {
                     ShowHint();
                 }
@@ -161,27 +162,42 @@ public class EndingSequence : MonoBehaviour
         _phase = Phase.Narration;
         _phaseTime = 0f;
 
-        if (UITextManager.Instance != null)
+        if (UITextManager.Instance == null)
         {
-            UITextManager.Instance.ShowCenter(WithSpeaker(narrationId), 0f, true);
+            return;
         }
+
+        string text = WithSpeaker(narrationId);
+        float readTime = Mathf.Max(3.5f, text.Length * 0.045f);
+        _hintDelay = Mathf.Max(narrationHold, text.Length * 0.035f + readTime + 0.35f);
+
+        UITextManager.Instance.ShowCenter(text, readTime, false);
     }
 
     private static string WithSpeaker(string id)
     {
         string line = Loc.Text(id);
         string speaker = Loc.Speaker(id);
-        return string.IsNullOrEmpty(speaker) ? line : speaker + "\\n" + line;
+        return string.IsNullOrEmpty(speaker) ? line : speaker + "\n" + line;
     }
 
     private void ShowHint()
     {
         _phase = Phase.Hint;
 
-        if (UITextManager.Instance != null)
+        if (UITextManager.Instance == null)
         {
-            UITextManager.Instance.ShowText(Loc.Text(hintId), 0f, true);
+            return;
         }
+
+        StartCoroutine(FadeToHint());
+    }
+
+    private System.Collections.IEnumerator FadeToHint()
+    {
+        UITextManager.Instance.HideCenter();
+        yield return new WaitForSeconds(0.4f);
+        UITextManager.Instance.ShowCenter(Loc.Text(hintId), 4f, false);
     }
 
     private bool TryBeginFall()
