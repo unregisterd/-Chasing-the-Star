@@ -1,4 +1,4 @@
-// molly | Ending fall, dark star field, remembered blocks and music.
+﻿// molly | Ending fall, dark star field, remembered blocks and music.
 using System.Collections;
 using System.Collections.Generic;
 using Cinemachine;
@@ -88,8 +88,8 @@ public sealed class MollyEndingAnimation : MonoBehaviour
         if (sky && shader) {
             skyMaterial = new Material(shader); skyMaterial.mainTexture = sky; skyMaterial.SetTexture("_BaseMap", sky);
             // molly | Use only the upper star field; the mountain strip stays outside the UV window.
-            skyMaterial.SetTextureScale("_BaseMap", new Vector2(1f, .55f));
-            skyMaterial.SetTextureOffset("_BaseMap", new Vector2(0f, .45f));
+            skyMaterial.SetTextureScale("_BaseMap", Vector2.one);
+            skyMaterial.SetTextureOffset("_BaseMap", Vector2.zero);
             skyQuad = GameObject.CreatePrimitive(PrimitiveType.Quad);
             skyQuad.name = "MollyEndingDarkSky";
             Destroy(skyQuad.GetComponent<Collider>());
