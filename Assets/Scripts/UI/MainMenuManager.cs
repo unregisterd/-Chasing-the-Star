@@ -57,6 +57,9 @@ public class MainMenuManager : MonoBehaviour
     [SerializeField] private Texture2D languageZhIcon;
 
     private AudioSource _bgmSource;
+    private Camera _menuCamera;
+    private Transform _menuBackdrop;
+    private const float BackdropDistance = 15f;
     private AudioSource _sfxSource;
     private AudioClip _clickClip;
     private bool _leaving;
@@ -75,7 +78,7 @@ public class MainMenuManager : MonoBehaviour
 
     private void SetupBackground()
     {
-        if (transform.Find("MenuBackground") != null)
+        if (_menuBackdrop != null)
         {
             return;
         }
@@ -87,20 +90,51 @@ public class MainMenuManager : MonoBehaviour
             return;
         }
 
-        GameObject background = new GameObject("MenuBackground", typeof(RectTransform));
-        background.transform.SetParent(transform, false);
-        background.transform.SetAsFirstSibling();
+        _menuCamera = Camera.main;
 
-        RectTransform rect = (RectTransform)background.transform;
-        rect.anchorMin = Vector2.zero;
-        rect.anchorMax = Vector2.one;
-        rect.offsetMin = Vector2.zero;
-        rect.offsetMax = Vector2.zero;
+        if (_menuCamera == null)
+        {
+            return;
+        }
 
-        RawImage image = background.AddComponent<RawImage>();
-        image.texture = texture;
-        image.color = Color.white;
-        image.raycastTarget = false;
+        GameObject quad = GameObject.CreatePrimitive(PrimitiveType.Quad);
+        quad.name = "MenuBackdrop";
+        Destroy(quad.GetComponent<Collider>());
+
+        quad.transform.SetParent(_menuCamera.transform, false);
+        quad.transform.localPosition = new Vector3(0f, 0f, BackdropDistance);
+        quad.transform.localRotation = Quaternion.identity;
+
+        Shader shader = Shader.Find("Universal Render Pipeline/Unlit");
+        Material material = new Material(shader);
+        material.SetTexture("_BaseMap", texture);
+        material.SetTexture("_MainTex", texture);
+        material.SetColor("_BaseColor", Color.white);
+
+        Renderer renderer = quad.GetComponent<Renderer>();
+        renderer.sharedMaterial = material;
+        renderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
+        renderer.receiveShadows = false;
+
+        _menuBackdrop = quad.transform;
+        FitBackdrop();
+    }
+
+    private void FitBackdrop()
+    {
+        if (_menuBackdrop == null || _menuCamera == null)
+        {
+            return;
+        }
+
+        float height = 2f * BackdropDistance * Mathf.Tan(_menuCamera.fieldOfView * 0.5f * Mathf.Deg2Rad) * 1.1f;
+        float width = height * _menuCamera.aspect * 1.1f;
+        _menuBackdrop.localScale = new Vector3(width, height, 1f);
+    }
+
+    private void LateUpdate()
+    {
+        FitBackdrop();
     }
 
     private void HideLegacyArt()
@@ -255,7 +289,7 @@ public class MainMenuManager : MonoBehaviour
         {
             titleLabel.font = Loc.Language == "en" ? titleFontEn : titleFontZh;
         }
-        if (subtitleLabel != null) subtitleLabel.text = Loc.Language == "en" ? string.Empty : "CHASING THE STAR";
+        if (subtitleLabel != null) subtitleLabel.text = Loc.Text("menu_subtitle");
         if (startLabel != null) startLabel.text = Loc.Text("menu_start");
         if (quitLabel != null) quitLabel.text = Loc.Text("menu_quit");
 

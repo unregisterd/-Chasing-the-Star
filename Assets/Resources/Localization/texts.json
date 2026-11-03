@@ -575,6 +575,19 @@
         "en": "Easy"
       },
       "note": "主菜单难度标签"
+    },
+    {
+      "id": "menu_subtitle",
+      "type": "ui",
+      "speaker": {
+        "zh": "",
+        "en": ""
+      },
+      "text": {
+        "zh": "CHASING THE STAR",
+        "en": "CHASING THE STAR"
+      },
+      "note": "主菜单副标题"
     }
   ]
 }
