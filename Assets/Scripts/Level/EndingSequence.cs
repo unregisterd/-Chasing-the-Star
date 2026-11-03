@@ -62,6 +62,14 @@ public class EndingSequence : MonoBehaviour
 
         _active = this;
         IsPlaying = false;
+
+        foreach (EndingHintTrigger legacy in FindObjectsOfType<EndingHintTrigger>(true))
+        {
+            if (legacy != null)
+            {
+                Destroy(legacy);
+            }
+        }
         _mollyEnding = GetComponent<MollyEndingAnimation>();
         if (_mollyEnding == null) _mollyEnding = gameObject.AddComponent<MollyEndingAnimation>();
         _phase = Phase.Idle;
