@@ -167,13 +167,13 @@ public sealed class MollyEndingAnimation : MonoBehaviour
 
         skyQuad.transform.localPosition = new Vector3(
             Mathf.Sin(time * 0.15f) * 14f,
-            fall * 0.16f,
+            fall * 0.5f,
             800f);
 
-        float roll = time * 0.35f + Mathf.Sin(time * 0.1f) * 2.5f;
+        float roll = time * 0.6f + Mathf.Sin(time * 0.1f) * 2.5f;
         skyQuad.transform.localRotation = Quaternion.Euler(0f, 0f, roll);
 
-        float scaleMul = 1f + time * 0.004f;
+        float scaleMul = 1f + time * 0.0025f;
         skyQuad.transform.localScale = skyBaseScale * scaleMul;
     }
 

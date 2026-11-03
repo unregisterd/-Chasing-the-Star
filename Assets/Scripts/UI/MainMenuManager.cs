@@ -1,4 +1,4 @@
-using DG.Tweening;
+﻿using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -49,6 +49,8 @@ public class MainMenuManager : MonoBehaviour
     [SerializeField] private TMP_Text difficultyHardLabel;
     [SerializeField] private TMP_Text difficultyEasyLabel;
     [SerializeField] private TMP_Text languageZhLabel;
+    [SerializeField] private TMP_FontAsset titleFontZh;
+    [SerializeField] private TMP_FontAsset titleFontEn;
     [SerializeField] private TMP_Text languageEnLabel;
     [SerializeField] private RawImage languageToggleIcon;
     [SerializeField] private Texture2D languageEnIcon;
@@ -65,8 +67,55 @@ public class MainMenuManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
 
+        SetupBackground();
+        HideLegacyArt();
         SetupSky();
         SetupAudio();
+    }
+
+    private void SetupBackground()
+    {
+        if (transform.Find("MenuBackground") != null)
+        {
+            return;
+        }
+
+        Texture2D texture = Resources.Load<Texture2D>("UI/T_MenuBackground");
+
+        if (texture == null)
+        {
+            return;
+        }
+
+        GameObject background = new GameObject("MenuBackground", typeof(RectTransform));
+        background.transform.SetParent(transform, false);
+        background.transform.SetAsFirstSibling();
+
+        RectTransform rect = (RectTransform)background.transform;
+        rect.anchorMin = Vector2.zero;
+        rect.anchorMax = Vector2.one;
+        rect.offsetMin = Vector2.zero;
+        rect.offsetMax = Vector2.zero;
+
+        RawImage image = background.AddComponent<RawImage>();
+        image.texture = texture;
+        image.color = Color.white;
+        image.raycastTarget = false;
+    }
+
+    private void HideLegacyArt()
+    {
+        string[] names = { "Knight", "Knight Glow", "Warm Haze" };
+
+        for (int i = 0; i < names.Length; i++)
+        {
+            Transform found = transform.Find(names[i]);
+
+            if (found != null)
+            {
+                found.gameObject.SetActive(false);
+            }
+        }
     }
 
     private void Start()
@@ -93,16 +142,14 @@ public class MainMenuManager : MonoBehaviour
 
     private void SetupSky()
     {
-        Shader shader = Shader.Find("Sky/Gradient");
+        RenderSettings.skybox = null;
 
-        if (shader != null)
+        Camera camera = Camera.main;
+
+        if (camera != null)
         {
-            Material sky = new Material(shader);
-            sky.SetColor("_TopColor", skyTop);
-            sky.SetColor("_HorizonColor", skyHorizon);
-            sky.SetColor("_GroundColor", skyGround);
-            sky.SetFloat("_Exponent", 1.3f);
-            RenderSettings.skybox = sky;
+            camera.clearFlags = CameraClearFlags.SolidColor;
+            camera.backgroundColor = new Color(0.09f, 0.07f, 0.15f);
         }
 
         RenderSettings.ambientMode = UnityEngine.Rendering.AmbientMode.Flat;
@@ -203,6 +250,11 @@ public class MainMenuManager : MonoBehaviour
     private void RefreshLocalized()
     {
         if (titleLabel != null) titleLabel.text = Loc.Text("menu_title");
+
+        if (titleLabel != null && titleFontZh != null && titleFontEn != null)
+        {
+            titleLabel.font = Loc.Language == "en" ? titleFontEn : titleFontZh;
+        }
         if (subtitleLabel != null) subtitleLabel.text = Loc.Language == "en" ? string.Empty : "CHASING THE STAR";
         if (startLabel != null) startLabel.text = Loc.Text("menu_start");
         if (quitLabel != null) quitLabel.text = Loc.Text("menu_quit");
