@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6104868107099253720}
   - component: {fileID: 2833484178167451309}
   - component: {fileID: 7980212916021859001}
+  - component: {fileID: 8020089872988412718}
   m_Layer: 0
   m_Name: npc_Hope
   m_TagString: Untagged
@@ -135,6 +136,27 @@ MonoBehaviour:
   walletOverride: {fileID: 0}
   pickupClip: {fileID: 0}
   pickupVolume: 0.8
+--- !u!114 &8020089872988412718
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3002710844745533760}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ef92a901e81bf847b86ebe45ac31f62, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolSize: 4
+  startScale: 0.7
+  endScale: 3.2
+  duration: 1.1
+  startAlpha: 0.85
+  heightOffset: -0.5
+  loop: 0
+  loopInterval: 1.6
+  randomRotation: 1
 --- !u!1001 &8741454932502034160
 PrefabInstance:
   m_ObjectHideFlags: 0
