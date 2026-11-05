@@ -99,7 +99,7 @@ public sealed class MollyEndingAnimation : MonoBehaviour
             skyQuad.transform.localPosition = new Vector3(0, 0, 800);
             skyQuad.transform.localRotation = Quaternion.identity;
             float height = 1600 * Mathf.Tan(cameraView.fieldOfView * .5f * Mathf.Deg2Rad);
-            skyQuad.transform.localScale = new Vector3(height * cameraView.aspect * 2, height * 2, 1);
+            skyQuad.transform.localScale = new Vector3(height * cameraView.aspect * 2.6f, height * 2.6f, 1);
             skyBaseScale = skyQuad.transform.localScale;
         }
         AudioClip clip = Resources.Load<AudioClip>("Audio/BGM/ending");
@@ -164,13 +164,15 @@ public sealed class MollyEndingAnimation : MonoBehaviour
         }
 
         float fall = .5f * Mathf.Max(.1f, gravity) * time * time;
+        float maxDrift = skyBaseScale.y * 0.15f;
+        float drift = Mathf.Min(fall * 0.8f, maxDrift);
 
         skyQuad.transform.localPosition = new Vector3(
             Mathf.Sin(time * 0.15f) * 14f,
-            fall * 0.8f,
+            drift,
             800f);
 
-        float roll = time * 1.2f + Mathf.Sin(time * 0.1f) * 2.5f;
+        float roll = time * 0.3f + Mathf.Sin(time * 0.1f) * 2f;
         skyQuad.transform.localRotation = Quaternion.Euler(0f, 0f, roll);
 
         float scaleMul = 1f + time * 0.008f;

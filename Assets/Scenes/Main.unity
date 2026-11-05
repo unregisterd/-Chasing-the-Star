@@ -16621,17 +16621,17 @@ PrefabInstance:
     - target: {fileID: 274547287138062850, guid: 57d057f6b948d42428c20ff4b428e407,
         type: 3}
       propertyPath: m_FollowOffset.x
-      value: -3.310327
+      value: 0.6822452
       objectReference: {fileID: 0}
     - target: {fileID: 274547287138062850, guid: 57d057f6b948d42428c20ff4b428e407,
         type: 3}
       propertyPath: m_FollowOffset.y
-      value: 1.406633
+      value: -1.231272
       objectReference: {fileID: 0}
     - target: {fileID: 274547287138062850, guid: 57d057f6b948d42428c20ff4b428e407,
         type: 3}
       propertyPath: m_FollowOffset.z
-      value: 0.1520428
+      value: 3.313383
       objectReference: {fileID: 0}
     - target: {fileID: 718864998840168681, guid: 57d057f6b948d42428c20ff4b428e407,
         type: 3}
@@ -22990,7 +22990,7 @@ MonoBehaviour:
   playerOverride: {fileID: 0}
   narrationId: ending_narration
   hintId: ending_jump_hint
-  narrationHold: 6
+  narrationHold: 3
   fallLatchDistance: 1.5
   voidDropDistance: 6
 --- !u!1001 &1659660765
