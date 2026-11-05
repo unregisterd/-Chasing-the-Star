@@ -14761,6 +14761,12 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 11183759}
     m_Modifications:
+    - target: {fileID: 3100013224925486511, guid: 208521d680ad8c7459538520117dd535,
+        type: 3}
+      propertyPath: type
+      value: 
+      objectReference: {fileID: 11400000, guid: b6ff3457859fb58469f5f23ce4b0dcef,
+        type: 2}
     - target: {fileID: 4844358110767877898, guid: 208521d680ad8c7459538520117dd535,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -14816,6 +14822,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Filler
       objectReference: {fileID: 0}
+    - target: {fileID: 5802203431425981227, guid: 208521d680ad8c7459538520117dd535,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: d606afb81391df649a94b937259d6d4a, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -16621,17 +16632,17 @@ PrefabInstance:
     - target: {fileID: 274547287138062850, guid: 57d057f6b948d42428c20ff4b428e407,
         type: 3}
       propertyPath: m_FollowOffset.x
-      value: 0.6822452
+      value: -1.819011
       objectReference: {fileID: 0}
     - target: {fileID: 274547287138062850, guid: 57d057f6b948d42428c20ff4b428e407,
         type: 3}
       propertyPath: m_FollowOffset.y
-      value: -1.231272
+      value: 1.712246
       objectReference: {fileID: 0}
     - target: {fileID: 274547287138062850, guid: 57d057f6b948d42428c20ff4b428e407,
         type: 3}
       propertyPath: m_FollowOffset.z
-      value: 3.313383
+      value: 2.592183
       objectReference: {fileID: 0}
     - target: {fileID: 718864998840168681, guid: 57d057f6b948d42428c20ff4b428e407,
         type: 3}
@@ -22065,6 +22076,24 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2222927803919368665, guid: 7424accf003f0104984f8d18233cb971,
+        type: 3}
+      propertyPath: palette
+      value: 
+      objectReference: {fileID: 11400000, guid: dcabdb554f96dda41ac71e8739cd02de,
+        type: 2}
+    - target: {fileID: 2222927803919368665, guid: 7424accf003f0104984f8d18233cb971,
+        type: 3}
+      propertyPath: hopePlatformType
+      value: 
+      objectReference: {fileID: 11400000, guid: 19d07d51cd4c3ea48b170a9996644887,
+        type: 2}
+    - target: {fileID: 2222927803919368665, guid: 7424accf003f0104984f8d18233cb971,
+        type: 3}
+      propertyPath: hopePlatformPrefab
+      value: 
+      objectReference: {fileID: 7776630781381193650, guid: 668e21f47ca6dac44976fb885888d206,
+        type: 3}
     - target: {fileID: 2382395440481098465, guid: 7424accf003f0104984f8d18233cb971,
         type: 3}
       propertyPath: anchor
@@ -22990,7 +23019,7 @@ MonoBehaviour:
   playerOverride: {fileID: 0}
   narrationId: ending_narration
   hintId: ending_jump_hint
-  narrationHold: 3
+  narrationHold: 2
   fallLatchDistance: 1.5
   voidDropDistance: 6
 --- !u!1001 &1659660765
