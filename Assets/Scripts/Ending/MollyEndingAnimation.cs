@@ -87,10 +87,10 @@ public sealed class MollyEndingAnimation : MonoBehaviour
         Shader shader = Shader.Find("Universal Render Pipeline/Unlit");
         Debug.Log("[molly Ending] Sky image=" + (sky ? sky.name : "missing") + ", shader=" + (shader ? shader.name : "missing"));
         if (sky && shader) {
-            skyMaterial = new Material(shader); skyMaterial.mainTexture = sky; skyMaterial.SetTexture("_BaseMap", sky);
+            skyMaterial = new Material(shader); skyMaterial.mainTexture = sky; skyMaterial.SetTexture("_BaseMap", sky); skyMaterial.SetColor("_BaseColor", new Color(.85f, .9f, 1f, 1f));
             // molly | Use only the upper star field; the mountain strip stays outside the UV window.
-            skyMaterial.SetTextureScale("_BaseMap", Vector2.one);
-            skyMaterial.SetTextureOffset("_BaseMap", Vector2.zero);
+            skyMaterial.SetTextureScale("_BaseMap", new Vector2(1f, .6f));
+            skyMaterial.SetTextureOffset("_BaseMap", new Vector2(0f, .4f));
             skyQuad = GameObject.CreatePrimitive(PrimitiveType.Quad);
             skyQuad.name = "MollyEndingDarkSky";
             Destroy(skyQuad.GetComponent<Collider>());
@@ -167,13 +167,13 @@ public sealed class MollyEndingAnimation : MonoBehaviour
 
         skyQuad.transform.localPosition = new Vector3(
             Mathf.Sin(time * 0.15f) * 14f,
-            fall * 0.5f,
+            fall * 0.8f,
             800f);
 
-        float roll = time * 0.6f + Mathf.Sin(time * 0.1f) * 2.5f;
+        float roll = time * 1.2f + Mathf.Sin(time * 0.1f) * 2.5f;
         skyQuad.transform.localRotation = Quaternion.Euler(0f, 0f, roll);
 
-        float scaleMul = 1f + time * 0.0025f;
+        float scaleMul = 1f + time * 0.008f;
         skyQuad.transform.localScale = skyBaseScale * scaleMul;
     }
 
