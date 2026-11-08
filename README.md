@@ -1,80 +1,59 @@
-# Default Project — Game Jam 协作仓库
+# 逐星 / Chasing the Star 
+taptap 浏览与下载界面：https://www.taptap.cn/app/1033682?os=pc
 
-Unity **2022.3.62f3c1**（URP 14.0.12）+ 内置 ProjectBase 框架（DOTween、UIManager、EventManager、ObjectPool 等）。
-版本控制使用 **Unity Version Control（UVCS / 原 Plastic SCM）**，已集成在编辑器内。
+> “你找到那颗永不熄灭的星星了吗？”
 
-仓库：`Default Project GameJam@tj_lyker05@cloud.cn`（组织 `tj_lyker05`，分支 `main`）。
+本项目是为 **thatgamejam #02** 开发的一款 3D 平台跳跃解谜游戏。游戏以一段轻松的攀登之旅开始，最终在极简的几何美学与情绪饱满的结局反转中落下帷幕。
 
-## 1. 首次准备（每人一次）
+## 游戏简介
 
-1. 安装 **Unity 2022.3.62f3c1**（版本必须一致，用 Unity Hub 安装）。
-2. 用**被邀请的 Unity ID** 登录 Unity Hub（不是 GitHub 账号）。
-3. 美术同学如果不想开 Unity，可另装 **Unity Version Control（Gluon）** 客户端。
+传说在世界最高处有一颗永不熄灭的星星。为了寻找它，小骑士踏上了攀登的旅途。
+在攀登过程中，玩家需要跳跃于方块之间，并在遇到危险鸿沟时，通过收集 NPC 的馈赠，合理规划并使用星能（勇气、耐心、希望、智慧），克服难关。
 
-## 2. 拉工程
+**核心玩法：**
+*   **极限跳跃**：通过精准的走位与平台跳跃跨越障碍。
+*   **资源管理**：星能上限仅 4 点，四大技能共用资源池，如何分配是通关的关键。
+*   **视觉叙事**：游戏场景参考《纪念碑谷》，采用极简低多边形（Low-Poly）与莫兰迪色系，天色随高度从黄昏渐变至深夜。
+*   **反转结局**：……（请亲自走到旅途的终点）。
 
-1. 打开 Unity（任意工程或本项目）→ `Window → Version Control`
-2. `Sign in`（被邀请的 Unity ID）
-3. 工作区下拉框 → **创建新的工作区 / Create workspace**
-4. 弹窗填写：
-   - **存储库**：`Default Project GameJam`
-   - **工作区名称**：自己取，建议 `名字-main`（不需要和主程同名）
-   - 模式选 `I need branching, merging, and the ability to push/pull (Unity VCS workspace)`
-   - **路径**：一个空的本地目录（建议 `E:\UNITY\<项目名>`，不要放 OneDrive）
-5. `Create workspace` 等待下载 → Unity Hub `Add project from disk` 选该目录打开
+## 操作说明 (Controls)
 
-> 拉下来的是**项目根目录**（和 `Assets/` 平级），不要只取 `Assets`。
-> 工作区是本机的，每人各建一个；同名的是“存储库”，不是工作区。
+*   **W/A/S/D** 或 **方向键**：移动
+*   **Space (空格)**：跳跃
+*   **1**：勇气（高跳）
+*   **2**：智慧（显现隐藏道路）
+*   **3**：耐心（升起脚下方块）
+*   **4**：希望（半空生成临时平台）  
+*   **Esc**：暂停/菜单
+*   **R**：重置到最近检查点
+*   **Shift**: 冲刺
 
-## 3. 每天流程
+## 技术栈与开发环境 (Tech Stack)
 
-1. `Window → Version Control` 点 **更新 / Update**（先拉最新）
-2. 改自己的文件
-3. `Changes` 里只勾自己改的东西，填 Changeset 说明，点 **签入 / Check in**
-4. 需要独占的文件先 **Checkout** 加锁，签入后自动解锁
+*   **引擎**：Unity 2022.3
+*   **渲染管线**：URP (Universal Render Pipeline)
+*   **核心插件**：DOTween (动画), Cinemachine (相机), TextMeshPro (UI)
+*   **输入系统**：Unity Legacy Input / New Input System 
 
-**说明写法建议**：`feat: 玩家移动与相机跟随`、`fix: 跳跃穿地`、`art: 主角贴图`、`ui: 主菜单`。
+##  制作团队 (Credits)
 
-## 4. 目录约定
+感谢团队在两周的爆肝与陪伴：
 
-| 目录 | 用途 | 说明 |
-| --- | --- | --- |
-| `Assets/Scenes/Main.unity` | 主场景 | **仅主程**修改，唯一的整合场景 |
-| `Assets/Scenes/Sandbox/` | 沙盒 | 每人自己的测试场景 |
-| `Assets/Scripts/` | 程序 | 按模块建子目录，如 `Player/`、`UI/`、`System/` |
-| `Assets/Prefabs/` | 交付 | 做完的 Prefab 放这里，主程拖进 Main |
-| `Assets/Art/` | 美术 | 贴图、模型、材质 |
-| `Assets/Audio/` | 音效 | BGM、SFX |
-| `Assets/UI/` | UI | 界面图、Sprite、字体 |
-| `Assets/Text/` | 策划 | 文本表（json/csv/ScriptableObject） |
-| `Assets/AssetsTemplate/` | 框架 | ProjectBase 框架与 DOTween，**不要改** |
+*   **策划/文案 (Game Design & Narrative)**：打群架都请假
+*   **程序 (Programming)**：小墨，Lucille
+*   **美术/视觉 (Art & Visuals)**：加勒比海带，南风祈鹤
+*   **音乐与音效 (Audio)**：小墨
 
-## 5. 测试场景规范（重要）
+## 特别鸣谢 (Special Thanks)
 
-每个人在自己的沙盒场景里干活，成果通过 Prefab 交付，`Main.unity` 只由主程合并。
+*   感谢 **thatgamejam** 提供的创作平台与主题。
+*   音效素材来源于 [Kenney 等网站]。
 
-- **美术**：在 `Assets/Scenes/Sandbox/` 建 `Sandbox_Art_名字`，随便调模型/材质/灯光；满意后做成 Prefab 放 `Assets/Prefabs/`，签入。
-- **程序**：同样建 `Dev_模块名`，在里面跑通逻辑，交付 Prefab 或独立脚本。
-- 需要在主场景环境下测试：右键 `Main.unity` → `Open Scene Additive`，**不要保存对 Main 的修改**（保存前确认 Active Scene 不是 Main）。
-- 所有 `Sandbox_*` / `Dev_*` 场景**不要加入 Build Settings**（当前只有 `Main.unity` 启用；别按 `Add Open Scenes`，它会把当前打开的沙盒场景加进去）。
-- 交付 Prefab 时连带依赖一起签入：右键 Prefab → `Select Dependencies`，确认材质/贴图/Shader 都在，否则队友拉下来是粉色。
-- 沙盒场景可以入库（防本地丢失），但只改自己名字的那个。
+---
+*“哪怕前方无路，也要有踏碎虚空的胆识。”*
 
-## 6. 冲突处理
 
-UVCS 对 Unity YAML 有内置合并，但**同一场景/同一 Prefab 的并发修改仍会产生冲突**：
 
-1. 冲突时先 **撤销更改 / Undo changes** 撤回自己未签入的改动，别硬合。
-2. 在群里说明改了哪个文件，由该文件当前负责人处理。
-3. 场景/Prefab 无法自动合并时，保留原始文件，重做改动。
 
-预防永远比合并便宜：改主场景前先 Checkout，改完立刻签入。
 
-## 7. 硬性规则
 
-- **`.meta` 文件必须提交**，Unity 靠它维持引用；不要手动删/改。
-- 不提交 `Library/`、`Temp/`、`Logs/`、`obj/`、`UserSettings/`、`*.csproj`、`*.sln`（已在 `ignore.conf`）。
-- 不提交 `Build/` 打包产物。
-- 大文件（fbx/png/wav/psd/视频/字体）直接加，UVCS 原生支持，不需要 LFS。
-- 项目设置（URP、Input、Tag/Layer、Package）改动单独签入并在群里说一声。
-- `.git` / `.gitignore` / `.gitattributes` 仅作 GitHub 备份保留，日常不要再用 Git 提交。
